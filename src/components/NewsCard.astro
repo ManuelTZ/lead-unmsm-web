@@ -1,0 +1,22 @@
+---
+import type { NewsArticle } from '@/models/content';
+import { formatDate } from '@/lib/date';
+interface Props { article: NewsArticle; }
+const { article } = Astro.props;
+---
+
+<article class="card news-card">
+  <div class="meta"><span class="tag">{article.category}</span><span>{formatDate(article.publishedAt)}</span></div>
+  <h3><a href={`/noticias/${article.slug}`}>{article.title}</a></h3>
+  <p class="muted">{article.excerpt}</p>
+  <span class="author">{article.author}</span>
+</article>
+
+<style>
+  .news-card { display: flex; flex-direction: column; }
+  .meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: .78rem; }
+  h3 { margin: 18px 0 8px; font-size: 1.35rem; line-height: 1.15; }
+  h3 a { text-decoration: none; }
+  h3 a:hover { color: var(--rose-300); }
+  .author { margin-top: auto; padding-top: 12px; color: #d6d6dc; font-size: .84rem; }
+</style>

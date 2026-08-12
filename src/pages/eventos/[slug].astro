@@ -1,0 +1,25 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ApplicationCTA from '@/components/ApplicationCTA.astro';
+import { events } from '@/data/events';
+import { formatDate } from '@/lib/date';
+
+export function getStaticPaths() {
+  return events.map((event) => ({ params: { slug: event.slug }, props: { event } }));
+}
+
+const { event } = Astro.props;
+---
+
+<BaseLayout title={event.title} description={event.excerpt}>
+  <article class="section"><div class="container detail">
+    <a class="back" href="/eventos">← Todos los eventos</a>
+    <p class="eyebrow">{event.mode} · {formatDate(event.date)}</p>
+    <h1 class="section-title">{event.title}</h1>
+    <p class="lead">{event.excerpt}</p>
+    <div class="card info"><div><span>Lugar</span><strong>{event.location}</strong></div><div><span>Estado</span><strong>{event.status === 'upcoming' ? 'Próximo' : 'Finalizado'}</strong></div></div>
+    {event.status === 'upcoming' && <ApplicationCTA label="Inscribirme" />}
+    {event.isDemo && <p class="muted">Evento de demostración. Sustituir por información oficial.</p>}
+  </div></article>
+</BaseLayout>
+<style>.detail{max-width:850px}.back{display:inline-block;margin-bottom:34px;color:var(--muted);text-decoration:none}.lead{font-size:1.2rem;color:#d0d0d6}.info{display:grid;grid-template-columns:1fr 1fr;margin:28px 0}.info div{display:grid;gap:4px}.info span{color:var(--muted);font-size:.82rem}.info strong{font-size:1.05rem}@media(max-width:640px){.info{grid-template-columns:1fr;gap:18px}}</style>

@@ -1,0 +1,87 @@
+---
+import { quizQuestions } from '@/data/profileQuiz';
+---
+
+<form class="quiz" data-profile-quiz>
+  <div class="quiz-head">
+    <p class="eyebrow">Test interactivo</p>
+    <h2>Descubre tu perfil LEAD</h2>
+    <p class="muted">Modelo provisional: las áreas finales deben validarse con LEAD UNMSM.</p>
+  </div>
+
+  {quizQuestions.map((question, index) => (
+    <fieldset>
+      <legend><span>{String(index + 1).padStart(2, '0')}</span>{question.prompt}</legend>
+      <div class="options">
+        {question.options.map((option) => (
+          <label>
+            <input type="radio" name={question.id} value={option.profile} required />
+            <span>{option.label}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  ))}
+
+  <div class="quiz-actions">
+    <button class="button button-primary" type="submit">Ver mi perfil</button>
+    <p class="validation" data-validation aria-live="polite"></p>
+  </div>
+
+  <section class="result card" data-result hidden tabindex="-1" aria-live="polite">
+    <p class="eyebrow">Tu resultado</p>
+    <h3 data-result-title></h3>
+    <p class="muted" data-result-description></p>
+    <a class="button button-secondary" href="/eventos">Explorar oportunidades</a>
+  </section>
+</form>
+
+<script>
+  import { calculateProfile } from '@/lib/quiz';
+  import { profileSummaries, quizQuestions } from '@/data/profileQuiz';
+  import type { ProfileKey } from '@/data/profileQuiz';
+
+  document.querySelectorAll<HTMLFormElement>('[data-profile-quiz]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const selected = [...form.querySelectorAll<HTMLInputElement>('input[type="radio"]:checked')];
+      const validation = form.querySelector<HTMLElement>('[data-validation]');
+      const result = form.querySelector<HTMLElement>('[data-result]');
+
+      if (selected.length !== quizQuestions.length) {
+        if (validation) validation.textContent = 'Responde todas las preguntas para calcular tu perfil.';
+        return;
+      }
+
+      if (validation) validation.textContent = '';
+      const profile = calculateProfile(selected.map((input) => input.value as ProfileKey));
+      if (!profile || !result) return;
+
+      const summary = profileSummaries[profile];
+      const title = result.querySelector<HTMLElement>('[data-result-title]');
+      const description = result.querySelector<HTMLElement>('[data-result-description]');
+      if (title) title.textContent = summary.title;
+      if (description) description.textContent = summary.description;
+      result.hidden = false;
+      result.focus();
+    });
+  });
+</script>
+
+<style>
+  .quiz { max-width: 860px; margin-inline: auto; }
+  .quiz-head { margin-bottom: 34px; }
+  .quiz-head h2 { font-size: clamp(2rem, 5vw, 3.6rem); margin: 0 0 10px; letter-spacing: -.045em; line-height: 1; }
+  fieldset { border: 0; padding: 28px 0; margin: 0; border-top: 1px solid var(--ink-700); }
+  legend { width: 100%; display: flex; gap: 14px; font-weight: 850; font-size: 1.05rem; }
+  legend span { color: var(--rose-500); font-variant-numeric: tabular-nums; }
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+  label { display: flex; gap: 10px; align-items: flex-start; padding: 14px; border: 1px solid var(--ink-700); border-radius: 10px; background: var(--ink-900); cursor: pointer; }
+  label:has(input:checked) { border-color: var(--rose-500); background: #1b0e14; }
+  input { margin-top: 4px; accent-color: var(--rose-500); }
+  .quiz-actions { margin-top: 24px; }
+  .validation { color: var(--rose-200); min-height: 1.5em; }
+  .result { margin-top: 26px; border-color: #6f2943; }
+  .result h3 { font-size: 1.8rem; margin: 0 0 8px; }
+  @media (max-width: 680px) { .options { grid-template-columns: 1fr; } }
+</style>

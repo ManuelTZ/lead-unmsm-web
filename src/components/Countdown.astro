@@ -1,0 +1,67 @@
+---
+interface Props { deadline: string; label?: string; }
+const { deadline, label = 'Cierre de postulaciones' } = Astro.props;
+---
+
+<section class="countdown" data-countdown data-deadline={deadline} aria-live="polite">
+  <p class="eyebrow">{label}</p>
+  <div class="units" data-units hidden>
+    <span><b data-days>0</b><small>días</small></span>
+    <span><b data-hours>0</b><small>horas</small></span>
+    <span><b data-minutes>0</b><small>min</small></span>
+    <span><b data-seconds>0</b><small>seg</small></span>
+  </div>
+  <p class="muted" data-status>Fecha pendiente de configurar.</p>
+</section>
+
+<script>
+  import { getCountdownState } from '@/lib/countdown';
+
+  document.querySelectorAll<HTMLElement>('[data-countdown]').forEach((root) => {
+    const deadline = root.dataset.deadline ?? '';
+    const units = root.querySelector<HTMLElement>('[data-units]');
+    const status = root.querySelector<HTMLElement>('[data-status]');
+    let timer: number | undefined;
+
+    const render = () => {
+      const state = getCountdownState(deadline);
+      if (!status || !units) return false;
+
+      if (!state.isValid) {
+        units.hidden = true;
+        status.hidden = false;
+        status.textContent = 'Fecha pendiente de configurar.';
+        return false;
+      }
+
+      if (state.isExpired) {
+        units.hidden = true;
+        status.hidden = false;
+        status.textContent = 'La convocatoria ha cerrado.';
+        return false;
+      }
+
+      units.hidden = false;
+      status.hidden = true;
+      const set = (selector: string, value: number) => {
+        const node = root.querySelector<HTMLElement>(selector);
+        if (node) node.textContent = String(value).padStart(2, '0');
+      };
+      set('[data-days]', state.days);
+      set('[data-hours]', state.hours);
+      set('[data-minutes]', state.minutes);
+      set('[data-seconds]', state.seconds);
+      return true;
+    };
+
+    if (render()) timer = window.setInterval(render, 1000);
+  });
+</script>
+
+<style>
+  .countdown { padding: 18px 0 0; }
+  .units { display: grid; grid-template-columns: repeat(4, minmax(64px, 1fr)); gap: 8px; max-width: 420px; }
+  .units span { border: 1px solid var(--ink-700); border-radius: 10px; padding: 12px 8px; text-align: center; background: #0d0d11; }
+  .units b { display: block; font-size: clamp(1.4rem, 4vw, 2.1rem); line-height: 1; }
+  .units small { display: block; margin-top: 6px; color: var(--muted); }
+</style>

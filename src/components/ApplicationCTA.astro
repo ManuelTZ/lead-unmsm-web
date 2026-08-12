@@ -1,0 +1,14 @@
+---
+import { siteConfig } from '@/config/site';
+interface Props { label?: string; className?: string; }
+const { label = 'Postula a LEAD', className = '' } = Astro.props;
+const url = siteConfig.applicationFormUrl;
+---
+
+{url ? (
+  <a class={`button button-primary ${className}`} href={url} target="_blank" rel="noreferrer">{label}</a>
+) : (
+  <span class={`button button-secondary ${className}`} aria-disabled="true" title="Configura PUBLIC_APPLICATION_FORM_URL">
+    Formulario pendiente
+  </span>
+)}

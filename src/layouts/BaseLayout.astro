@@ -1,0 +1,40 @@
+---
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { siteConfig } from '@/config/site';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = siteConfig.name,
+  description = siteConfig.description,
+} = Astro.props;
+const fullTitle = title === siteConfig.name ? title : `${title} · ${siteConfig.name}`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#08080B" />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    {siteConfig.prototype && (
+      <div class="demo-note" role="note">
+        Prototipo LEAD UNMSM · eventos, cifras y perfiles todavía contienen datos de demostración.
+      </div>
+    )}
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

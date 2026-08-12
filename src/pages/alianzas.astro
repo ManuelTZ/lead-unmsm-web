@@ -1,0 +1,9 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { siteConfig } from '@/config/site';
+---
+<BaseLayout title="Alianzas">
+  <section class="section"><div class="container alliance"><p class="eyebrow">Empresas e instituciones</p><h1 class="section-title">Una propuesta de alianza directa y medible.</h1><p class="section-copy">Separar este recorrido ayuda a que una empresa vea impacto, formatos de colaboración y contacto sin recorrer contenido pensado para postulantes.</p>{siteConfig.contactFormUrl ? <a class="button button-primary" href={siteConfig.contactFormUrl} target="_blank" rel="noreferrer">Conversar sobre una alianza</a> : <span class="button button-secondary" aria-disabled="true">Contacto pendiente</span>}</div></section>
+  <section class="section toned"><div class="container grid columns"><div class="card"><span class="tag">01</span><h2>Talento</h2><p class="muted">Conecta actividades con estudiantes interesados en STEM y liderazgo.</p></div><div class="card"><span class="tag">02</span><h2>Impacto</h2><p class="muted">Muestra métricas reales, evidencia y continuidad de los programas.</p></div><div class="card"><span class="tag">03</span><h2>Contenido</h2><p class="muted">Charlas, talleres, retos, mentorías y colaboraciones editoriales.</p></div></div></section>
+</BaseLayout>
+<style>.alliance .button{margin-top:18px}.toned{background:#0c0c10;border-block:1px solid var(--ink-800)}.columns{grid-template-columns:repeat(3,1fr)}.card h2{font-size:1.7rem;margin:16px 0 8px}@media(max-width:760px){.columns{grid-template-columns:1fr}}</style>

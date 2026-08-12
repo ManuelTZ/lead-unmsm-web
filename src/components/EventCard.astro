@@ -1,0 +1,30 @@
+---
+import type { LeadEvent } from '@/models/content';
+import { formatDate } from '@/lib/date';
+interface Props { event: LeadEvent; }
+const { event } = Astro.props;
+---
+
+<article class="card event-card">
+  <div class="event-top">
+    <span class="tag">{event.mode}</span>
+    {event.isDemo && <span class="demo">DEMO</span>}
+  </div>
+  <p class="date">{formatDate(event.date)}</p>
+  <h3><a href={`/eventos/${event.slug}`}>{event.title}</a></h3>
+  <p class="muted">{event.excerpt}</p>
+  <p class="location">{event.location}</p>
+  <a class="text-link" href={`/eventos/${event.slug}`}>Ver evento →</a>
+</article>
+
+<style>
+  .event-card { display: flex; flex-direction: column; min-height: 270px; }
+  .event-top { display: flex; justify-content: space-between; gap: 12px; }
+  .demo { color: #7e7e88; font-size: .7rem; font-weight: 900; letter-spacing: .12em; }
+  .date { color: var(--rose-300); font-size: .83rem; font-weight: 850; margin: 20px 0 6px; }
+  h3 { margin: 0; font-size: 1.35rem; line-height: 1.15; }
+  h3 a { text-decoration: none; }
+  h3 a:hover { color: var(--rose-300); }
+  .location { margin-top: auto; color: #d7d7dc; font-size: .9rem; }
+  .text-link { color: var(--rose-300); font-weight: 850; text-decoration: none; }
+</style>

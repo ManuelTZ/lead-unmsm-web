@@ -1,0 +1,12 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import NewsCard from '@/components/NewsCard.astro';
+import { contentRepository } from '@/services/content/repository';
+const news = await contentRepository.listNews();
+---
+
+<BaseLayout title="Noticias">
+  <section class="section"><div class="container"><p class="eyebrow">Radar STEM</p><h1 class="section-title">Noticias, referentes y oportunidades.</h1><p class="section-copy">Formato editorial pensado para que LEAD UNMSM publique contenido breve sin saturar la home.</p></div></section>
+  <section class="section toned"><div class="container"><div class="grid news-list">{news.map((article) => <NewsCard article={article} />)}</div></div></section>
+</BaseLayout>
+<style>.toned{background:#0c0c10;border-block:1px solid var(--ink-800)}.news-list{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:720px){.news-list{grid-template-columns:1fr}}</style>

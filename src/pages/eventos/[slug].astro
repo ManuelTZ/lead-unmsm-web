@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ApplicationCTA from '@/components/ApplicationCTA.astro';
-import { events } from '@/data/events';
 import { formatDate } from '@/lib/date';
 import { resolveEventRegistrationUrl } from '@/lib/eventRegistration';
+import { contentRepository } from '@/services/content/repository';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const events = await contentRepository.listEvents();
   return events.map((event) => ({ params: { slug: event.slug }, props: { event } }));
 }
 

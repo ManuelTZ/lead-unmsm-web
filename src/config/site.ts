@@ -1,19 +1,16 @@
-const usableUrl = (value?: string) => {
-  if (!value || value.includes('REEMPLAZAR')) return '';
-  return value;
-};
+import { normalizeGoogleFormsUrl, normalizePublicUrl } from '@/lib/publicUrl';
 
 export const siteConfig = {
   name: 'LEAD UNMSM',
   description:
     'Comunidad universitaria orientada a STEM, liderazgo, innovación e impacto desde la UNMSM.',
   prototype: import.meta.env.PUBLIC_PROTOTYPE !== 'false',
-  applicationFormUrl: usableUrl(import.meta.env.PUBLIC_APPLICATION_FORM_URL),
-  contactFormUrl: usableUrl(import.meta.env.PUBLIC_CONTACT_FORM_URL),
+  applicationFormUrl: normalizeGoogleFormsUrl(import.meta.env.PUBLIC_APPLICATION_FORM_URL),
+  contactFormUrl: normalizePublicUrl(import.meta.env.PUBLIC_CONTACT_FORM_URL),
   applicationDeadline: import.meta.env.PUBLIC_APPLICATION_DEADLINE ?? '',
   socials: {
-    instagram: usableUrl(import.meta.env.PUBLIC_INSTAGRAM_URL),
-    linkedin: usableUrl(import.meta.env.PUBLIC_LINKEDIN_URL),
-    tiktok: usableUrl(import.meta.env.PUBLIC_TIKTOK_URL),
+    instagram: normalizePublicUrl(import.meta.env.PUBLIC_INSTAGRAM_URL),
+    linkedin: normalizePublicUrl(import.meta.env.PUBLIC_LINKEDIN_URL),
+    tiktok: normalizePublicUrl(import.meta.env.PUBLIC_TIKTOK_URL),
   },
 };

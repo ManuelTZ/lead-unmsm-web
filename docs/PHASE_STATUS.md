@@ -10,7 +10,7 @@ Este archivo se actualiza al cerrar cada PR.
 | 3. Countdown   | 2026-08-15: visible en Inicio y estados activo/expirado/inválido cubiertos; falta fecha oficial      | Vitest + E2E; fecha pendiente   |
 | 4. Perfil      | 2026-08-15: scoring, empate, aviso provisional, resultado y CTA cubiertos en desktop/móvil           | Vitest + E2E                    |
 | 5. Noticias    | 2026-08-15: listado, detalles y navegación verificados en desktop/móvil; contenido oficial pendiente | unit + E2E; contenido pendiente |
-| 6. CMS         | No iniciado a propósito                                                                              | contrato de repositorio         |
+| 6. CMS         | 2026-08-15: contrato local, seis esquemas y rutas de Eventos/Noticias desacopladas; CMS pendiente    | unit + E2E; adaptador pendiente |
 | 7. UX/UI final | No iniciado a propósito                                                                              | tests existentes siguen verdes  |
 | 8. Lanzamiento | No iniciado                                                                                          | checklist calidad               |
 | 9. Handover    | No iniciado                                                                                          | documentación + accesos         |

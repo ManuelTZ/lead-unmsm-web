@@ -6,18 +6,26 @@ test('home muestra navegación y CTA principal', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'Explorar eventos' })).toBeVisible();
 });
 
-test('puede navegar a eventos y noticias', async ({ page }) => {
-  await page.goto('/');
+test('la navegación principal recorre todas las rutas institucionales', async ({ page }) => {
+  const routes = [
+    { href: '/', heading: 'Liderazgo STEM' },
+    { href: '/eventos', heading: 'Eventos' },
+    { href: '/noticias', heading: 'Noticias' },
+    { href: '/nosotros', heading: 'LEAD UNMSM' },
+    { href: '/alianzas', heading: 'Una propuesta de alianza' },
+    { href: '/perfil', heading: 'Descubre tu perfil LEAD' },
+  ];
 
-  const menu = page.getByText('Menú', { exact: true });
-  if (await menu.isVisible()) {
-    await menu.click();
+  for (const route of routes) {
+    await page.goto('/');
+
+    const menu = page.getByText('Menú', { exact: true });
+    if (await menu.isVisible()) {
+      await menu.click();
+    }
+
+    await page.locator(`a[href="${route.href}"]:visible`).first().click();
+    await expect(page).toHaveURL((url) => url.pathname === route.href);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(route.heading);
   }
-
-  await page.locator('a[href="/eventos"]:visible').first().click();
-  await expect(page).toHaveURL(/\/eventos$/);
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Eventos');
-
-  await page.goto('/noticias');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Noticias');
 });

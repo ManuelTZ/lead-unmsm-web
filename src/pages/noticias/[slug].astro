@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { news } from '@/data/news';
 import { formatDate } from '@/lib/date';
+import { contentRepository } from '@/services/content/repository';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const news = await contentRepository.listNews();
   return news.map((article) => ({ params: { slug: article.slug }, props: { article } }));
 }
 const { article } = Astro.props;

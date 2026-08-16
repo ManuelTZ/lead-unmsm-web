@@ -1,11 +1,13 @@
-import type { LeadEvent, NewsArticle, ImpactMetric, Partner } from '@/models/content';
+import type { LeadEvent, NewsArticle, ImpactMetric, Partner, Member } from '@/models/content';
 import { events } from '@/data/events';
+import { members } from '@/data/members';
 import { news } from '@/data/news';
 import { metrics } from '@/data/metrics';
 import { partners } from '@/data/partners';
 
 export interface ContentRepository {
   listEvents(): Promise<LeadEvent[]>;
+  listMembers(): Promise<Member[]>;
   listNews(): Promise<NewsArticle[]>;
   listMetrics(): Promise<ImpactMetric[]>;
   listPartners(): Promise<Partner[]>;
@@ -14,6 +16,9 @@ export interface ContentRepository {
 export const localContentRepository: ContentRepository = {
   async listEvents() {
     return [...events];
+  },
+  async listMembers() {
+    return [...members];
   },
   async listNews() {
     return [...news];

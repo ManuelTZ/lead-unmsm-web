@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { events } from '@/data/events';
+import { members } from '@/data/members';
 import { metrics } from '@/data/metrics';
 import { news } from '@/data/news';
 import { partners } from '@/data/partners';
@@ -13,6 +14,7 @@ interface CollectionCase {
 
 const collections: CollectionCase[] = [
   { name: 'eventos', list: () => localContentRepository.listEvents(), source: events },
+  { name: 'miembros', list: () => localContentRepository.listMembers(), source: members },
   { name: 'noticias', list: () => localContentRepository.listNews(), source: news },
   { name: 'métricas', list: () => localContentRepository.listMetrics(), source: metrics },
   { name: 'aliados', list: () => localContentRepository.listPartners(), source: partners },

@@ -1,4 +1,5 @@
 ---
+import Countdown from '@/components/Countdown.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { homeContent } from '@/data/home';
 import { siteConfig } from '@/config/site';
@@ -18,6 +19,7 @@ import { siteConfig } from '@/config/site';
           {homeContent.secondaryAction.label}
         </a>
       </div>
+      <Countdown deadline={siteConfig.applicationDeadline} />
     </div>
   </section>
 </BaseLayout>

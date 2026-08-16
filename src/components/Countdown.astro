@@ -24,7 +24,6 @@ const { deadline, label = 'Cierre de postulaciones' } = Astro.props;
     const deadline = root.dataset.deadline ?? '';
     const units = root.querySelector<HTMLElement>('[data-units]');
     const status = root.querySelector<HTMLElement>('[data-status]');
-    let timer: number | undefined;
 
     const render = () => {
       const state = getCountdownState(deadline);
@@ -57,7 +56,11 @@ const { deadline, label = 'Cierre de postulaciones' } = Astro.props;
       return true;
     };
 
-    if (render()) timer = window.setInterval(render, 1000);
+    if (render()) {
+      const timer = window.setInterval(() => {
+        if (!render()) window.clearInterval(timer);
+      }, 1000);
+    }
   });
 </script>
 

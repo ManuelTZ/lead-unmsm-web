@@ -29,3 +29,18 @@ test('la navegación principal recorre todas las rutas institucionales', async (
     await expect(page.getByRole('heading', { level: 1 })).toContainText(route.heading);
   }
 });
+
+test('home muestra un estado observable del countdown', async ({ page }) => {
+  await page.goto('/');
+
+  const countdown = page.locator('[data-countdown]');
+  await expect(countdown).toBeVisible();
+  await expect(countdown.getByText('Cierre de postulaciones', { exact: true })).toBeVisible();
+  await expect
+    .poll(async () => {
+      const unitsVisible = await countdown.locator('[data-units]').isVisible();
+      const statusVisible = await countdown.locator('[data-status]').isVisible();
+      return unitsVisible || statusVisible;
+    })
+    .toBe(true);
+});

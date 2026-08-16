@@ -34,3 +34,13 @@ export interface Partner {
   url?: string;
   isDemo?: boolean;
 }
+
+export interface Member {
+  name: string;
+  role: string;
+  area?: string;
+  bio?: string;
+  imageSrc?: string;
+  linkedinUrl?: string;
+  isDemo?: boolean;
+}

@@ -29,3 +29,9 @@ Negro/carbón + rosa, sin gradientes dominantes. La identidad final se valida en
 **Estado:** aceptado.
 
 Se fija Node.js 22 como línea común con CI, se versiona `package-lock.json` y se declara `@types/node` 22 para mantener TypeScript estricto en Vitest y Playwright. Prettier usa `endOfLine: auto` para que `format:check` sea estable con clones Windows configurados con `core.autocrlf`, sin cambiar el formato semántico del código.
+
+## ADR-006 — Colecciones institucionales vacías antes que identidades ficticias
+
+**Estado:** aceptado.
+
+Las colecciones de personas se modelan vacías hasta recibir datos oficiales. No se crean nombres, cargos, biografías, fotografías ni enlaces de demostración para representar integrantes reales.

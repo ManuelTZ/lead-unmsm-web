@@ -1,7 +1,9 @@
 ---
 import type { LeadEvent } from '@/models/content';
 import { formatDate } from '@/lib/date';
-interface Props { event: LeadEvent; }
+interface Props {
+  event: LeadEvent;
+}
 const { event } = Astro.props;
 ---
 
@@ -18,13 +20,47 @@ const { event } = Astro.props;
 </article>
 
 <style>
-  .event-card { display: flex; flex-direction: column; min-height: 270px; }
-  .event-top { display: flex; justify-content: space-between; gap: 12px; }
-  .demo { color: #7e7e88; font-size: .7rem; font-weight: 900; letter-spacing: .12em; }
-  .date { color: var(--rose-300); font-size: .83rem; font-weight: 850; margin: 20px 0 6px; }
-  h3 { margin: 0; font-size: 1.35rem; line-height: 1.15; }
-  h3 a { text-decoration: none; }
-  h3 a:hover { color: var(--rose-300); }
-  .location { margin-top: auto; color: #d7d7dc; font-size: .9rem; }
-  .text-link { color: var(--rose-300); font-weight: 850; text-decoration: none; }
+  .event-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 270px;
+  }
+  .event-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .demo {
+    color: #7e7e88;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+  }
+  .date {
+    color: var(--rose-300);
+    font-size: 0.83rem;
+    font-weight: 850;
+    margin: 20px 0 6px;
+  }
+  h3 {
+    margin: 0;
+    font-size: 1.35rem;
+    line-height: 1.15;
+  }
+  h3 a {
+    text-decoration: none;
+  }
+  h3 a:hover {
+    color: var(--rose-300);
+  }
+  .location {
+    margin-top: auto;
+    color: #d7d7dc;
+    font-size: 0.9rem;
+  }
+  .text-link {
+    color: var(--rose-300);
+    font-weight: 850;
+    text-decoration: none;
+  }
 </style>

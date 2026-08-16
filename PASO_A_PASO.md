@@ -58,12 +58,15 @@ También puedes usar `scripts/bootstrap-git.sh` o `scripts/bootstrap-git.ps1`.
 ## C. Usarlo con Codex
 
 ### Opción local
+
 Abre Codex en el directorio del repositorio. Codex leerá `AGENTS.md`, donde están las reglas del proyecto.
 
 ### Opción cloud/GitHub
+
 Conecta GitHub desde Codex y selecciona este repositorio. Trabaja por branch/PR, no directamente en `main`.
 
 Documentación oficial de referencia:
+
 - https://developers.openai.com/codex/quickstart
 - https://developers.openai.com/codex/agent-configuration/agents-md
 - https://developers.openai.com/codex/integrations/github

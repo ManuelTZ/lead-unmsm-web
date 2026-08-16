@@ -1,12 +1,15 @@
 # AGENTS.md — LEAD UNMSM Web
 
 ## Objetivo
+
 Construir una web institucional/editorial para LEAD UNMSM que sea sobria, rápida, barata de operar y fácil de transferir entre generaciones del equipo.
 
 ## Regla principal de trabajo
+
 Trabajar **función por función**. No mezclar varias funcionalidades grandes en un mismo cambio.
 
 ## Orden obligatorio
+
 1. Leer `docs/01-roadmap.md` y localizar la fase activa.
 2. Escribir o actualizar la prueba que demuestra el comportamiento esperado.
 3. Implementar la mínima funcionalidad que hace pasar la prueba.
@@ -16,6 +19,7 @@ Trabajar **función por función**. No mezclar varias funcionalidades grandes en
 7. Registrar decisiones importantes en `docs/DECISIONS.md`.
 
 ## Restricciones de producto
+
 - Inspirarse en el proyecto LEAD UNI suministrado, pero **no copiar código, textos, logos, imágenes ni composición visual**.
 - Identidad visual de esta propuesta: negro/carbón + rosa; evitar el lenguaje visual morado/neón del referente.
 - No usar stock genérico como contenido final.
@@ -25,6 +29,7 @@ Trabajar **función por función**. No mezclar varias funcionalidades grandes en
 - El contenido editable debe estar desacoplado de los componentes para migrarlo a un CMS en una fase posterior.
 
 ## Calidad
+
 - TypeScript estricto.
 - Accesibilidad por defecto: HTML semántico, teclado, foco visible y contraste suficiente.
 - Mobile-first.
@@ -33,16 +38,20 @@ Trabajar **función por función**. No mezclar varias funcionalidades grandes en
 - Nunca commitear secretos ni tokens.
 
 ## Fases
+
 No adelantar el rediseño visual final. La fase UX/UI formal es la Fase 7; antes de ella la interfaz puede ser limpia y usable, pero el objetivo es validar funciones.
 
 ## Antes de cerrar cualquier tarea
+
 Reportar:
+
 - archivos modificados,
 - pruebas ejecutadas y resultado,
 - riesgos/TODO,
 - siguiente unidad funcional recomendada.
 
 ## Code Review Rules
+
 - Rechazar cambios que mezclen múltiples features sin motivo.
 - Rechazar features sin prueba correspondiente cuando sean testeables.
 - Rechazar secretos, endpoints privados o datos personales hardcodeados.

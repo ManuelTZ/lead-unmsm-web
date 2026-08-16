@@ -14,6 +14,8 @@ describe('contenido local', () => {
   });
 
   it('usa fechas parseables para eventos', () => {
-    expect(events.every((event) => !Number.isNaN(Date.parse(`${event.date}T12:00:00Z`)))).toBe(true);
+    expect(events.every((event) => !Number.isNaN(Date.parse(`${event.date}T12:00:00Z`)))).toBe(
+      true,
+    );
   });
 });

@@ -17,7 +17,8 @@ export const news: NewsArticle[] = [
   {
     slug: 'radar-stem-demo',
     title: 'Radar STEM: cinco temas para seguir este mes — demo',
-    excerpt: 'Un formato corto para noticias, tendencias y oportunidades relevantes para estudiantes.',
+    excerpt:
+      'Un formato corto para noticias, tendencias y oportunidades relevantes para estudiantes.',
     publishedAt: '2026-07-24',
     author: 'Equipo editorial — demo',
     category: 'Radar STEM',

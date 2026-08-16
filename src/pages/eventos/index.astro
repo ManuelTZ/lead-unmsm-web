@@ -8,8 +8,37 @@ const past = events.filter((event) => event.status === 'past');
 ---
 
 <BaseLayout title="Eventos">
-  <section class="section"><div class="container"><p class="eyebrow">Agenda</p><h1 class="section-title">Eventos y oportunidades</h1><p class="section-copy">La prioridad funcional: entender el evento y llegar al registro sin fricción.</p></div></section>
-  <section class="section toned"><div class="container"><h2>Próximos</h2><div class="grid grid-3">{upcoming.map((event) => <EventCard event={event} />)}</div></div></section>
-  <section class="section"><div class="container"><h2>Archivo</h2><div class="grid grid-3">{past.map((event) => <EventCard event={event} />)}</div></div></section>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Agenda</p><h1 class="section-title">Eventos y oportunidades</h1><p
+        class="section-copy"
+      >
+        La prioridad funcional: entender el evento y llegar al registro sin fricción.
+      </p>
+    </div>
+  </section>
+  <section class="section toned">
+    <div class="container">
+      <h2>Próximos</h2><div class="grid grid-3">
+        {upcoming.map((event) => <EventCard event={event} />)}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <h2>Archivo</h2><div class="grid grid-3">
+        {past.map((event) => <EventCard event={event} />)}
+      </div>
+    </div>
+  </section>
 </BaseLayout>
-<style>.toned{background:#0c0c10;border-block:1px solid var(--ink-800)}h2{font-size:2rem;margin:0 0 22px}</style>
+<style>
+  .toned {
+    background: #0c0c10;
+    border-block: 1px solid var(--ink-800);
+  }
+  h2 {
+    font-size: 2rem;
+    margin: 0 0 22px;
+  }
+</style>

@@ -1,8 +1,47 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
+
 <BaseLayout title="Nosotros">
-  <section class="section"><div class="container"><p class="eyebrow">Institucional</p><h1 class="section-title">LEAD UNMSM, con identidad propia.</h1><p class="section-copy">Esta página debe explicar propósito, áreas, leadership team e impacto usando datos y fotografías oficiales.</p></div></section>
-  <section class="section toned"><div class="container grid columns"><div class="card"><span class="tag">Propósito</span><h2>Conectar liderazgo y STEM.</h2><p class="muted">Copy provisional. Validar misión y lenguaje con la dirección del chapter.</p></div><div class="card"><span class="tag">Equipo</span><h2>Leadership Team</h2><p class="muted">En Fase 6 este bloque se alimentará desde CMS para facilitar el relevo anual.</p></div></div></section>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Institucional</p><h1 class="section-title">
+        LEAD UNMSM, con identidad propia.
+      </h1><p class="section-copy">
+        Esta página debe explicar propósito, áreas, leadership team e impacto usando datos y
+        fotografías oficiales.
+      </p>
+    </div>
+  </section>
+  <section class="section toned">
+    <div class="container grid columns">
+      <div class="card">
+        <span class="tag">Propósito</span><h2>Conectar liderazgo y STEM.</h2><p class="muted">
+          Copy provisional. Validar misión y lenguaje con la dirección del chapter.
+        </p>
+      </div><div class="card">
+        <span class="tag">Equipo</span><h2>Leadership Team</h2><p class="muted">
+          En Fase 6 este bloque se alimentará desde CMS para facilitar el relevo anual.
+        </p>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
-<style>.toned{background:#0c0c10;border-block:1px solid var(--ink-800)}.columns{grid-template-columns:1fr 1fr}.card h2{font-size:2rem;margin:16px 0 8px}@media(max-width:720px){.columns{grid-template-columns:1fr}}</style>
+<style>
+  .toned {
+    background: #0c0c10;
+    border-block: 1px solid var(--ink-800);
+  }
+  .columns {
+    grid-template-columns: 1fr 1fr;
+  }
+  .card h2 {
+    font-size: 2rem;
+    margin: 16px 0 8px;
+  }
+  @media (max-width: 720px) {
+    .columns {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

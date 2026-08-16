@@ -1,15 +1,18 @@
 # 00 — Product spec
 
 ## Problema
+
 LEAD UNMSM necesita una presencia web que permita informar, captar postulantes, mostrar eventos/noticias y generar confianza ante aliados, sin crear una carga de mantenimiento cara para un grupo universitario.
 
 ## Usuarios principales
+
 1. **Estudiante:** quiere entender qué es LEAD, ver oportunidades y postular rápido.
 2. **Empresa/institución:** quiere validar impacto, actividades y vías de alianza.
 3. **Equipo de LEAD:** quiere publicar eventos/noticias sin tocar el diseño.
 4. **Programador/a de relevo:** necesita entender y modificar el proyecto con poco contexto previo.
 
 ## Objetivos MVP
+
 - Navegación clara y mobile-first.
 - Eventos próximos con CTA de inscripción.
 - Página de noticias.
@@ -20,6 +23,7 @@ LEAD UNMSM necesita una presencia web que permita informar, captar postulantes, 
 - Arquitectura preparada para CMS.
 
 ## No objetivos del MVP
+
 - Login de usuarios.
 - Portal privado.
 - Base de datos propia.
@@ -28,6 +32,7 @@ LEAD UNMSM necesita una presencia web que permita informar, captar postulantes, 
 - Panel administrativo hecho a medida.
 
 ## Principios
+
 - Static-first.
 - Costo operativo mínimo.
 - Contenido separado de presentación.
@@ -35,6 +40,7 @@ LEAD UNMSM necesita una presencia web que permita informar, captar postulantes, 
 - Identidad propia de LEAD UNMSM, no clon de LEAD UNI.
 
 ## Definición de terminado de una feature
+
 - Criterios de aceptación cumplidos.
 - Prueba unitaria o E2E adecuada.
 - `npm run verify` verde.

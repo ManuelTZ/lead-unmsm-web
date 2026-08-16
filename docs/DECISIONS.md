@@ -35,3 +35,9 @@ Se fija Node.js 22 como línea común con CI, se versiona `package-lock.json` y 
 **Estado:** aceptado.
 
 Las colecciones de personas se modelan vacías hasta recibir datos oficiales. No se crean nombres, cargos, biografías, fotografías ni enlaces de demostración para representar integrantes reales.
+
+## ADR-007 — Prensa solo con fuentes verificables
+
+**Estado:** aceptado.
+
+La colección de prensa permanece vacía hasta contar con apariciones reales. Cada entrada requiere medio, fecha y URL pública verificable; no se crean menciones de demostración.

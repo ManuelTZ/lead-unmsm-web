@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.1.0 — Starter
+
 - Estructura Astro + TypeScript.
 - Home y rutas base.
 - Datos demo desacoplados.

@@ -21,9 +21,13 @@ const pathname = Astro.url.pathname;
     </a>
 
     <nav class="desktop-nav" aria-label="Navegación principal">
-      {links.map(([href, label]) => (
-        <a class:list={['nav-link', { active: pathname === href }]} href={href}>{label}</a>
-      ))}
+      {
+        links.map(([href, label]) => (
+          <a class:list={['nav-link', { active: pathname === href }]} href={href}>
+            {label}
+          </a>
+        ))
+      }
     </nav>
 
     <details class="mobile-nav">
@@ -36,18 +40,98 @@ const pathname = Astro.url.pathname;
 </header>
 
 <style>
-  .site-header { position: sticky; top: 0; z-index: 20; background: rgba(8,8,11,.94); border-bottom: 1px solid var(--ink-800); backdrop-filter: blur(12px); }
-  .header-inner { min-height: 70px; display: flex; align-items: center; gap: 24px; }
-  .brand { display: inline-flex; align-items: center; gap: 10px; margin-right: auto; color: var(--white); text-decoration: none; font-weight: 900; letter-spacing: .02em; }
-  .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; background: var(--rose-500); color: #19050d; }
-  .desktop-nav { display: flex; align-items: center; gap: 4px; }
-  .nav-link { padding: 9px 10px; border-radius: 8px; color: var(--muted); text-decoration: none; font-size: .92rem; font-weight: 750; }
-  .nav-link:hover, .nav-link.active { color: var(--white); background: var(--ink-850); }
-  .nav-link.active { box-shadow: inset 0 -2px var(--rose-500); }
-  .mobile-nav { display: none; position: relative; }
-  .mobile-nav summary { cursor: pointer; list-style: none; border: 1px solid var(--ink-700); border-radius: 8px; padding: 8px 11px; font-weight: 800; }
-  .mobile-nav nav { position: absolute; right: 0; top: calc(100% + 10px); min-width: 220px; padding: 8px; background: var(--ink-900); border: 1px solid var(--ink-700); border-radius: 12px; }
-  .mobile-nav a { display: block; padding: 11px; border-radius: 8px; color: var(--white); text-decoration: none; }
-  .mobile-nav a:hover { background: var(--ink-800); }
-  @media (max-width: 900px) { .desktop-nav { display: none; } .mobile-nav { display: block; } }
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(8, 8, 11, 0.94);
+    border-bottom: 1px solid var(--ink-800);
+    backdrop-filter: blur(12px);
+  }
+  .header-inner {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: auto;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+  }
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--rose-500);
+    color: #19050d;
+  }
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-link {
+    padding: 9px 10px;
+    border-radius: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 750;
+  }
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--white);
+    background: var(--ink-850);
+  }
+  .nav-link.active {
+    box-shadow: inset 0 -2px var(--rose-500);
+  }
+  .mobile-nav {
+    display: none;
+    position: relative;
+  }
+  .mobile-nav summary {
+    cursor: pointer;
+    list-style: none;
+    border: 1px solid var(--ink-700);
+    border-radius: 8px;
+    padding: 8px 11px;
+    font-weight: 800;
+  }
+  .mobile-nav nav {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    min-width: 220px;
+    padding: 8px;
+    background: var(--ink-900);
+    border: 1px solid var(--ink-700);
+    border-radius: 12px;
+  }
+  .mobile-nav a {
+    display: block;
+    padding: 11px;
+    border-radius: 8px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .mobile-nav a:hover {
+    background: var(--ink-800);
+  }
+  @media (max-width: 900px) {
+    .desktop-nav {
+      display: none;
+    }
+    .mobile-nav {
+      display: block;
+    }
+  }
 </style>

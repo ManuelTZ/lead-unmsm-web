@@ -21,11 +21,7 @@ if (missing.length) {
   process.exit(1);
 }
 
-const sourceFiles = [
-  'src/components/Header.astro',
-  'src/pages/index.astro',
-  'src/config/site.ts',
-];
+const sourceFiles = ['src/components/Header.astro', 'src/pages/index.astro', 'src/config/site.ts'];
 for (const file of sourceFiles) {
   const text = readFileSync(resolve(file), 'utf8');
   if (/LEAD UNI(?!MSM)/i.test(text)) {

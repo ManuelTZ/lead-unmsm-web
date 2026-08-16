@@ -17,19 +17,53 @@ const socialEntries = Object.entries(siteConfig.socials).filter(([, url]) => Boo
     </div>
     <div>
       <strong>Redes</strong>
-      {socialEntries.length > 0 ? socialEntries.map(([name, url]) => (
-        <a href={url} target="_blank" rel="noreferrer">{name}</a>
-      )) : <span class="muted">Pendientes de configurar</span>}
+      {
+        socialEntries.length > 0 ? (
+          socialEntries.map(([name, url]) => (
+            <a href={url} target="_blank" rel="noreferrer">
+              {name}
+            </a>
+          ))
+        ) : (
+          <span class="muted">Pendientes de configurar</span>
+        )
+      }
     </div>
   </div>
 </footer>
 
 <style>
-  .footer { border-top: 1px solid var(--ink-800); padding: 42px 0; background: #060608; }
-  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 28px; }
-  .footer p { margin: 8px 0 0; color: var(--muted); }
-  .footer strong { display: block; margin-bottom: 9px; }
-  .footer a { display: block; width: fit-content; color: var(--muted); text-decoration: none; margin: 6px 0; }
-  .footer a:hover { color: var(--rose-300); }
-  @media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr; } }
+  .footer {
+    border-top: 1px solid var(--ink-800);
+    padding: 42px 0;
+    background: #060608;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 28px;
+  }
+  .footer p {
+    margin: 8px 0 0;
+    color: var(--muted);
+  }
+  .footer strong {
+    display: block;
+    margin-bottom: 9px;
+  }
+  .footer a {
+    display: block;
+    width: fit-content;
+    color: var(--muted);
+    text-decoration: none;
+    margin: 6px 0;
+  }
+  .footer a:hover {
+    color: var(--rose-300);
+  }
+  @media (max-width: 720px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

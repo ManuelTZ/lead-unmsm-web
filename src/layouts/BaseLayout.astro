@@ -9,10 +9,7 @@ interface Props {
   description?: string;
 }
 
-const {
-  title = siteConfig.name,
-  description = siteConfig.description,
-} = Astro.props;
+const { title = siteConfig.name, description = siteConfig.description } = Astro.props;
 const fullTitle = title === siteConfig.name ? title : `${title} · ${siteConfig.name}`;
 ---
 
@@ -26,11 +23,13 @@ const fullTitle = title === siteConfig.name ? title : `${title} · ${siteConfig.
     <title>{fullTitle}</title>
   </head>
   <body>
-    {siteConfig.prototype && (
-      <div class="demo-note" role="note">
-        Prototipo LEAD UNMSM · eventos, cifras y perfiles todavía contienen datos de demostración.
-      </div>
-    )}
+    {
+      siteConfig.prototype && (
+        <div class="demo-note" role="note">
+          Prototipo LEAD UNMSM · eventos, cifras y perfiles todavía contienen datos de demostración.
+        </div>
+      )
+    }
     <Header />
     <main id="main-content">
       <slot />

@@ -1,6 +1,7 @@
 # 07 — GitHub y sincronización
 
 ## Crear repositorio
+
 1. Crear un repositorio vacío en GitHub, por ejemplo `lead-unmsm-web`.
 2. No crear README remoto si ya usarás esta carpeta.
 3. Desde esta carpeta:
@@ -17,6 +18,7 @@ git push -u origin main
 O usar `scripts/bootstrap-git.sh URL` (macOS/Linux/Git Bash) o `scripts/bootstrap-git.ps1 URL` (PowerShell).
 
 ## Trabajo diario
+
 Nunca desarrollar directamente en `main`.
 
 ```bash
@@ -30,6 +32,7 @@ git push -u origin feat/04-profile-quiz
 Después abrir un Pull Request.
 
 ## Ramas sugeridas
+
 - `feat/01-navigation`
 - `feat/02-events`
 - `feat/03-countdown`
@@ -40,11 +43,14 @@ Después abrir un Pull Request.
 - `chore/08-launch-quality`
 
 ## Protección de main
+
 Cuando el repositorio ya esté en GitHub:
+
 - requerir Pull Request para mergear.
 - requerir que el workflow CI pase.
 - evitar force push.
 - opcional: activar revisión de código con Codex.
 
 ## Codex
+
 Codex puede trabajar directamente sobre un checkout local o sobre un repositorio conectado a GitHub. El archivo `AGENTS.md` viaja con el repo y define las reglas del proyecto.

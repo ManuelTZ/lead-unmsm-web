@@ -17,7 +17,8 @@ export const events: LeadEvent[] = [
     date: '2026-10-02',
     mode: 'Virtual',
     location: 'Online',
-    excerpt: 'Contenido demo: preparación para prácticas, empleabilidad y conversaciones con industria.',
+    excerpt:
+      'Contenido demo: preparación para prácticas, empleabilidad y conversaciones con industria.',
     status: 'upcoming',
     isDemo: true,
   },

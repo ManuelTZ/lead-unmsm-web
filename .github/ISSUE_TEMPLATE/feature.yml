@@ -1,13 +1,13 @@
 name: Feature incremental
 description: Crear una unidad funcional alineada al roadmap.
-title: "[Fase X] "
-labels: ["feature"]
+title: '[Fase X] '
+labels: ['feature']
 body:
   - type: input
     id: phase
     attributes:
       label: Fase
-      placeholder: "Fase 2 — Eventos"
+      placeholder: 'Fase 2 — Eventos'
     validations:
       required: true
   - type: textarea
@@ -21,7 +21,7 @@ body:
     id: acceptance
     attributes:
       label: Criterios de aceptación
-      placeholder: "- [ ] ..."
+      placeholder: '- [ ] ...'
     validations:
       required: true
   - type: textarea

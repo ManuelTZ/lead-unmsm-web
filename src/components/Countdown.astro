@@ -1,5 +1,8 @@
 ---
-interface Props { deadline: string; label?: string; }
+interface Props {
+  deadline: string;
+  label?: string;
+}
 const { deadline, label = 'Cierre de postulaciones' } = Astro.props;
 ---
 
@@ -59,9 +62,30 @@ const { deadline, label = 'Cierre de postulaciones' } = Astro.props;
 </script>
 
 <style>
-  .countdown { padding: 18px 0 0; }
-  .units { display: grid; grid-template-columns: repeat(4, minmax(64px, 1fr)); gap: 8px; max-width: 420px; }
-  .units span { border: 1px solid var(--ink-700); border-radius: 10px; padding: 12px 8px; text-align: center; background: #0d0d11; }
-  .units b { display: block; font-size: clamp(1.4rem, 4vw, 2.1rem); line-height: 1; }
-  .units small { display: block; margin-top: 6px; color: var(--muted); }
+  .countdown {
+    padding: 18px 0 0;
+  }
+  .units {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(64px, 1fr));
+    gap: 8px;
+    max-width: 420px;
+  }
+  .units span {
+    border: 1px solid var(--ink-700);
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    background: #0d0d11;
+  }
+  .units b {
+    display: block;
+    font-size: clamp(1.4rem, 4vw, 2.1rem);
+    line-height: 1;
+  }
+  .units small {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+  }
 </style>

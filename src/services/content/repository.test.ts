@@ -4,6 +4,7 @@ import { members } from '@/data/members';
 import { metrics } from '@/data/metrics';
 import { news } from '@/data/news';
 import { partners } from '@/data/partners';
+import { press } from '@/data/press';
 import { localContentRepository } from './repository';
 
 interface CollectionCase {
@@ -18,6 +19,7 @@ const collections: CollectionCase[] = [
   { name: 'noticias', list: () => localContentRepository.listNews(), source: news },
   { name: 'métricas', list: () => localContentRepository.listMetrics(), source: metrics },
   { name: 'aliados', list: () => localContentRepository.listPartners(), source: partners },
+  { name: 'prensa', list: () => localContentRepository.listPress(), source: press },
 ];
 
 describe('contrato del repositorio local de contenido', () => {

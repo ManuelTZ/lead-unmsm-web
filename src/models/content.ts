@@ -44,3 +44,12 @@ export interface Member {
   linkedinUrl?: string;
   isDemo?: boolean;
 }
+
+export interface PressMention {
+  title: string;
+  outlet: string;
+  publishedAt: string;
+  url: string;
+  excerpt?: string;
+  isDemo?: boolean;
+}

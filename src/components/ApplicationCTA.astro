@@ -3,9 +3,13 @@ import { siteConfig } from '@/config/site';
 interface Props {
   label?: string;
   className?: string;
+  url?: string;
 }
-const { label = 'Postula a LEAD', className = '' } = Astro.props;
-const url = siteConfig.applicationFormUrl;
+const {
+  label = 'Postula a LEAD',
+  className = '',
+  url = siteConfig.applicationFormUrl,
+} = Astro.props;
 ---
 
 {

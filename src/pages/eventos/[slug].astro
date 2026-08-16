@@ -3,12 +3,14 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import ApplicationCTA from '@/components/ApplicationCTA.astro';
 import { events } from '@/data/events';
 import { formatDate } from '@/lib/date';
+import { resolveEventRegistrationUrl } from '@/lib/eventRegistration';
 
 export function getStaticPaths() {
   return events.map((event) => ({ params: { slug: event.slug }, props: { event } }));
 }
 
 const { event } = Astro.props;
+const registrationUrl = resolveEventRegistrationUrl(event);
 ---
 
 <BaseLayout title={event.title} description={event.excerpt}>
@@ -25,7 +27,7 @@ const { event } = Astro.props;
           >
         </div>
       </div>
-      {event.status === 'upcoming' && <ApplicationCTA label="Inscribirme" />}
+      {event.status === 'upcoming' && <ApplicationCTA label="Inscribirme" url={registrationUrl} />}
       {
         event.isDemo && (
           <p class="muted">Evento de demostración. Sustituir por información oficial.</p>

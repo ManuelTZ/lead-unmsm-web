@@ -6,6 +6,18 @@ test('home muestra navegación y CTA principal', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'Explorar eventos' })).toBeVisible();
 });
 
+test('permite saltar la navegación principal con teclado', async ({ page }) => {
+  await page.goto('/');
+
+  await page.keyboard.press('Tab');
+  const skipLink = page.getByRole('link', { name: 'Saltar al contenido principal' });
+  await expect(skipLink).toBeVisible();
+  await expect(skipLink).toBeFocused();
+
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#main-content')).toBeFocused();
+});
+
 test('la navegación principal recorre todas las rutas institucionales', async ({ page }) => {
   const routes = [
     { href: '/', heading: 'Liderazgo STEM' },

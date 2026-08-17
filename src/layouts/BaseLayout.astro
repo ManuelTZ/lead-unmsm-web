@@ -23,6 +23,7 @@ const fullTitle = title === siteConfig.name ? title : `${title} · ${siteConfig.
     <title>{fullTitle}</title>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
     {
       siteConfig.prototype && (
         <div class="demo-note" role="note">
@@ -31,7 +32,7 @@ const fullTitle = title === siteConfig.name ? title : `${title} · ${siteConfig.
       )
     }
     <Header />
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
     <Footer />

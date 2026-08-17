@@ -39,6 +39,10 @@ test('la navegación principal recorre todas las rutas institucionales', async (
     await page.locator(`a[href="${route.href}"]:visible`).first().click();
     await expect(page).toHaveURL((url) => url.pathname === route.href);
     await expect(page.getByRole('heading', { level: 1 })).toContainText(route.heading);
+    const currentLinks = page.locator('nav a[aria-current="page"]');
+    await expect(currentLinks).toHaveCount(2);
+    await expect(currentLinks.nth(0)).toHaveAttribute('href', route.href);
+    await expect(currentLinks.nth(1)).toHaveAttribute('href', route.href);
   }
 });
 

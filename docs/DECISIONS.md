@@ -41,3 +41,9 @@ Las colecciones de personas se modelan vacías hasta recibir datos oficiales. No
 **Estado:** aceptado.
 
 La colección de prensa permanece vacía hasta contar con apariciones reales. Cada entrada requiere medio, fecha y URL pública verificable; no se crean menciones de demostración.
+
+## ADR-008 — CMS diferido hasta tener responsable operativo
+
+**Estado:** aceptado temporalmente.
+
+El repositorio local seguirá siendo la fuente activa. La integración con un CMS se retomará cuando el equipo designe quién administrará credenciales, permisos, publicación y continuidad del servicio.

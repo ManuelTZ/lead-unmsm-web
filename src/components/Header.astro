@@ -11,6 +11,8 @@ const links = [
 ] as const;
 
 const pathname = Astro.url.pathname;
+const isCurrent = (href: (typeof links)[number][0]) =>
+  href === '/' ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 ---
 
 <header class="site-header">
@@ -23,7 +25,11 @@ const pathname = Astro.url.pathname;
     <nav class="desktop-nav" aria-label="Navegación principal">
       {
         links.map(([href, label]) => (
-          <a class:list={['nav-link', { active: pathname === href }]} href={href}>
+          <a
+            class:list={['nav-link', { active: isCurrent(href) }]}
+            href={href}
+            aria-current={isCurrent(href) ? 'page' : undefined}
+          >
             {label}
           </a>
         ))
@@ -33,7 +39,13 @@ const pathname = Astro.url.pathname;
     <details class="mobile-nav">
       <summary aria-label="Abrir menú">Menú</summary>
       <nav aria-label="Navegación móvil">
-        {links.map(([href, label]) => <a href={href}>{label}</a>)}
+        {
+          links.map(([href, label]) => (
+            <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>
+              {label}
+            </a>
+          ))
+        }
       </nav>
     </details>
   </div>
@@ -123,7 +135,8 @@ const pathname = Astro.url.pathname;
     color: var(--white);
     text-decoration: none;
   }
-  .mobile-nav a:hover {
+  .mobile-nav a:hover,
+  .mobile-nav a[aria-current='page'] {
     background: var(--ink-800);
   }
   @media (max-width: 900px) {

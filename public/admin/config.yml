@@ -102,16 +102,24 @@ collections:
             required: false
             summary: '{{fields.title}}'
             fields:
-              - { label: Identificador URL, name: slug, widget: string }
-              - { label: Título, name: title, widget: string }
-              - { label: Resumen, name: excerpt, widget: text }
-              - { label: Fecha, name: publishedAt, widget: date, format: YYYY-MM-DD }
-              - { label: Autor, name: author, widget: string }
-              - { label: Categoría, name: category, widget: string }
+              - { label: Identificador URL, name: slug, widget: string, required: true }
+              - { label: Título, name: title, widget: string, required: true }
+              - { label: Resumen, name: excerpt, widget: text, required: true }
+              - {
+                  label: Fecha,
+                  name: publishedAt,
+                  widget: date,
+                  format: YYYY-MM-DD,
+                  required: true,
+                }
+              - { label: Autor, name: author, widget: string, required: true }
+              - { label: Categoría, name: category, widget: string, required: true }
               - label: Párrafos
                 name: body
                 widget: list
-                field: { label: Párrafo, name: paragraph, widget: text }
+                required: true
+                min: 1
+                field: { label: Párrafo, name: paragraph, widget: text, required: true }
 
       - name: members
         label: Equipo

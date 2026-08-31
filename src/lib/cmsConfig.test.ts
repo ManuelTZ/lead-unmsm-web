@@ -37,6 +37,15 @@ describe('configuración del CMS', () => {
     );
   });
 
+  it('exige los datos necesarios para publicar una noticia', () => {
+    const config = read('public/admin/config.yml');
+
+    expect(config).toMatch(
+      /label: Fecha,\s+name: publishedAt,\s+widget: date,\s+format: YYYY-MM-DD,\s+required: true,/,
+    );
+    expect(config).toContain('{ label: Autor, name: author, widget: string, required: true }');
+  });
+
   it('configura un build verificable y publicable en Netlify', () => {
     const netlify = read('netlify.toml');
 

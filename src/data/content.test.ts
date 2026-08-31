@@ -17,8 +17,18 @@ describe('contenido local', () => {
     ).toBe(true);
   });
 
-  it('no inventa noticias mientras no exista contenido editorial oficial', () => {
-    expect(news).toEqual([]);
+  it('solo expone noticias completas publicadas desde el CMS', () => {
+    expect(
+      news.every(
+        (article) =>
+          article.slug.length > 0 &&
+          article.title.length > 0 &&
+          article.excerpt.length > 0 &&
+          article.author.length > 0 &&
+          article.category.length > 0 &&
+          article.body.length > 0,
+      ),
+    ).toBe(true);
   });
 
   it('mantiene slugs únicos de eventos', () => {

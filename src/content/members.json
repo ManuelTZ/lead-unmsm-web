@@ -5,6 +5,13 @@
       "role": "DIRECTO",
       "area": "Desarrollo Profesional",
       "imageSrc": "/uploads/images-4-.jpg"
+    },
+    {
+      "name": "KRISHNA",
+      "role": "PRESI",
+      "area": "PRESI",
+      "bio": "PRESI",
+      "linkedinUrl": "https://www.linkedin.com/company/lead-unmsm"
     }
   ]
 }

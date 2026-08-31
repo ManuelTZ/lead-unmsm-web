@@ -41,6 +41,17 @@ test('la imagen social publica esta disponible', async ({ request }) => {
   expect(response.headers()['content-type']).toBe('image/png');
 });
 
+test('el encabezado muestra el logo oficial', async ({ page }) => {
+  await page.goto('/');
+
+  const logo = page.locator('.brand img');
+  await expect(logo).toBeVisible();
+  await expect(logo).toHaveAttribute('src', '/brand/lead-mark.png');
+  await expect
+    .poll(() => logo.evaluate((image) => (image as HTMLImageElement).naturalWidth))
+    .toBeGreaterThan(0);
+});
+
 test('permite saltar la navegación principal con teclado', async ({ page }) => {
   await page.goto('/');
 

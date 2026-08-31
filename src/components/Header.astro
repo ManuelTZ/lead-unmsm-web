@@ -36,9 +36,11 @@ const isCurrent = (href: (typeof links)[number][0]) =>
       }
     </nav>
 
-    <details class="mobile-nav">
-      <summary aria-label="Abrir menú">Menú</summary>
-      <nav aria-label="Navegación móvil">
+    <details class="mobile-nav" data-mobile-nav>
+      <summary aria-label="Abrir menú" aria-controls="mobile-navigation" aria-expanded="false"
+        >Menú</summary
+      >
+      <nav id="mobile-navigation" aria-label="Navegación móvil">
         {
           links.map(([href, label]) => (
             <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>
@@ -50,6 +52,28 @@ const isCurrent = (href: (typeof links)[number][0]) =>
     </details>
   </div>
 </header>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>('[data-mobile-nav]').forEach((disclosure) => {
+    const control = disclosure.querySelector<HTMLElement>('summary');
+    if (!control) return;
+
+    const syncState = () => {
+      control.setAttribute('aria-expanded', String(disclosure.open));
+      control.setAttribute('aria-label', disclosure.open ? 'Cerrar menú' : 'Abrir menú');
+    };
+
+    disclosure.addEventListener('toggle', syncState);
+    disclosure.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || !disclosure.open) return;
+
+      event.preventDefault();
+      disclosure.open = false;
+      control.focus();
+    });
+    syncState();
+  });
+</script>
 
 <style>
   .site-header {

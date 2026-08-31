@@ -17,20 +17,43 @@ const past = events.filter((event) => event.status === 'past');
       </p>
     </div>
   </section>
-  <section class="section toned">
-    <div class="container">
-      <h2>Próximos</h2><div class="grid grid-3">
-        {upcoming.map((event) => <EventCard event={event} />)}
-      </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container">
-      <h2>Archivo</h2><div class="grid grid-3">
-        {past.map((event) => <EventCard event={event} />)}
-      </div>
-    </div>
-  </section>
+  {
+    events.length === 0 ? (
+      <section class="section toned">
+        <div class="container empty-state" role="status">
+          <h2>Actualmente no hay eventos programados.</h2>
+          <p class="muted">La agenda aparecerá aquí cuando el equipo publique una actividad.</p>
+        </div>
+      </section>
+    ) : (
+      <>
+        {upcoming.length > 0 && (
+          <section class="section toned">
+            <div class="container">
+              <h2>Próximos</h2>
+              <div class="grid grid-3">
+                {upcoming.map((event) => (
+                  <EventCard event={event} />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+        {past.length > 0 && (
+          <section class="section">
+            <div class="container">
+              <h2>Archivo</h2>
+              <div class="grid grid-3">
+                {past.map((event) => (
+                  <EventCard event={event} />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+      </>
+    )
+  }
 </BaseLayout>
 <style>
   .toned {
@@ -40,5 +63,8 @@ const past = events.filter((event) => event.status === 'past');
   h2 {
     font-size: 2rem;
     margin: 0 0 22px;
+  }
+  .empty-state {
+    max-width: 760px;
   }
 </style>

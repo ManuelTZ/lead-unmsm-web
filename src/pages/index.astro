@@ -19,10 +19,23 @@ import { siteConfig } from '@/config/site';
           {homeContent.secondaryAction.label}
         </a>
       </div>
-      <Countdown deadline={siteConfig.applicationDeadline} />
+      <Countdown deadline={siteConfig.applicationDeadline} isOpen={siteConfig.applicationOpen} />
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline>
+  const identityToken = /^#(?:invite_token|confirmation_token|recovery_token|email_change_token)=/;
+
+  if (identityToken.test(window.location.hash)) {
+    const identityScript = document.createElement('script');
+    identityScript.src = 'https://identity.netlify.com/v1/netlify-identity-widget.js';
+    identityScript.addEventListener('load', () => {
+      window.netlifyIdentity?.on('login', () => window.location.assign('/admin/'));
+    });
+    document.head.append(identityScript);
+  }
+</script>
 
 <style>
   .hero {

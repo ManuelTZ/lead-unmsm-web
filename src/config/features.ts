@@ -4,5 +4,5 @@ export const features = {
   profileQuiz: true,
   news: true,
   alliances: true,
-  cms: false,
+  cms: true,
 } as const;

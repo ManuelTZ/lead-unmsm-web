@@ -5,6 +5,14 @@ import { news } from './news';
 const unique = (values: string[]) => new Set(values).size === values.length;
 
 describe('contenido local', () => {
+  it('no inventa eventos mientras no exista una agenda oficial', () => {
+    expect(events).toEqual([]);
+  });
+
+  it('no inventa noticias mientras no exista contenido editorial oficial', () => {
+    expect(news).toEqual([]);
+  });
+
   it('mantiene slugs únicos de eventos', () => {
     expect(unique(events.map((event) => event.slug))).toBe(true);
   });

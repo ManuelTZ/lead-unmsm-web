@@ -2,6 +2,7 @@
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import { siteConfig } from '@/config/site';
+import { buildPageMetadata } from '@/lib/pageMetadata';
 import '@/styles/global.css';
 
 interface Props {
@@ -10,7 +11,15 @@ interface Props {
 }
 
 const { title = siteConfig.name, description = siteConfig.description } = Astro.props;
-const fullTitle = title === siteConfig.name ? title : `${title} · ${siteConfig.name}`;
+const metadata = buildPageMetadata({
+  siteName: siteConfig.name,
+  pageTitle: title,
+  description,
+  siteUrl: siteConfig.siteUrl,
+  pathname: Astro.url.pathname,
+  socialImagePath: siteConfig.socialImage.path,
+});
+const indexingEnabled = Boolean(siteConfig.siteUrl) && !siteConfig.prototype;
 ---
 
 <!doctype html>
@@ -18,9 +27,36 @@ const fullTitle = title === siteConfig.name ? title : `${title} · ${siteConfig.
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={description} />
+    <meta name="description" content={metadata.description} />
     <meta name="theme-color" content="#08080B" />
-    <title>{fullTitle}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_PE" />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:title" content={metadata.title} />
+    <meta property="og:description" content={metadata.description} />
+    <meta
+      name="twitter:card"
+      content={metadata.socialImageUrl ? 'summary_large_image' : 'summary'}
+    />
+    <meta name="twitter:title" content={metadata.title} />
+    <meta name="twitter:description" content={metadata.description} />
+    {
+      metadata.socialImageUrl && (
+        <>
+          <meta property="og:image" content={metadata.socialImageUrl} />
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:width" content={String(siteConfig.socialImage.width)} />
+          <meta property="og:image:height" content={String(siteConfig.socialImage.height)} />
+          <meta property="og:image:alt" content={siteConfig.socialImage.alt} />
+          <meta name="twitter:image" content={metadata.socialImageUrl} />
+          <meta name="twitter:image:alt" content={siteConfig.socialImage.alt} />
+        </>
+      )
+    }
+    {!indexingEnabled && <meta name="robots" content="noindex, nofollow" />}
+    {metadata.canonicalUrl && <link rel="canonical" href={metadata.canonicalUrl} />}
+    {metadata.canonicalUrl && <meta property="og:url" content={metadata.canonicalUrl} />}
+    <title>{metadata.title}</title>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Saltar al contenido principal</a>

@@ -1,0 +1,174 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: es
+publish_mode: editorial_workflow
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: institutional
+    label: Contenido institucional
+    files:
+      - name: site
+        label: Configuración general
+        file: src/content/site.json
+        format: json
+        fields:
+          - { label: Nombre, name: name, widget: string }
+          - { label: Descripción SEO, name: description, widget: text }
+          - label: Convocatoria
+            name: application
+            widget: object
+            fields:
+              - { label: Convocatoria abierta, name: open, widget: boolean, default: false }
+              - { label: Formulario de Google, name: formUrl, widget: string, required: false }
+              - { label: Fecha de cierre, name: deadline, widget: datetime, required: false }
+          - { label: Formulario de contacto, name: contactFormUrl, widget: string, required: false }
+          - label: Redes sociales
+            name: socials
+            widget: object
+            fields:
+              - { label: Instagram, name: instagram, widget: string, required: false }
+              - { label: LinkedIn, name: linkedin, widget: string, required: false }
+              - { label: TikTok, name: tiktok, widget: string, required: false }
+
+      - name: home
+        label: Página de inicio
+        file: src/content/home.json
+        format: json
+        fields:
+          - { label: Etiqueta superior, name: eyebrow, widget: string }
+          - { label: Título, name: title, widget: string }
+          - { label: Introducción, name: introduction, widget: text }
+          - label: Acción principal
+            name: primaryAction
+            widget: object
+            fields:
+              - { label: Texto, name: label, widget: string }
+              - { label: Enlace, name: href, widget: string }
+          - label: Acción secundaria
+            name: secondaryAction
+            widget: object
+            fields:
+              - { label: Texto, name: label, widget: string }
+              - { label: Enlace, name: href, widget: string }
+
+      - name: events
+        label: Eventos
+        file: src/content/events.json
+        format: json
+        fields:
+          - label: Eventos
+            name: items
+            widget: list
+            required: false
+            summary: '{{fields.title}} — {{fields.date}}'
+            fields:
+              - { label: Identificador URL, name: slug, widget: string }
+              - { label: Título, name: title, widget: string }
+              - { label: Fecha, name: date, widget: date, format: YYYY-MM-DD }
+              - label: Modalidad
+                name: mode
+                widget: select
+                options: [Presencial, Virtual, Híbrido]
+              - { label: Ubicación, name: location, widget: string }
+              - { label: Resumen, name: excerpt, widget: text }
+              - {
+                  label: Formulario de inscripción,
+                  name: registrationUrl,
+                  widget: string,
+                  required: false,
+                }
+              - label: Estado
+                name: status
+                widget: select
+                options:
+                  - { label: Próximo, value: upcoming }
+                  - { label: Pasado, value: past }
+
+      - name: news
+        label: Noticias
+        file: src/content/news.json
+        format: json
+        fields:
+          - label: Noticias
+            name: items
+            widget: list
+            required: false
+            summary: '{{fields.title}}'
+            fields:
+              - { label: Identificador URL, name: slug, widget: string }
+              - { label: Título, name: title, widget: string }
+              - { label: Resumen, name: excerpt, widget: text }
+              - { label: Fecha, name: publishedAt, widget: date, format: YYYY-MM-DD }
+              - { label: Autor, name: author, widget: string }
+              - { label: Categoría, name: category, widget: string }
+              - label: Párrafos
+                name: body
+                widget: list
+                field: { label: Párrafo, name: paragraph, widget: text }
+
+      - name: members
+        label: Equipo
+        file: src/content/members.json
+        format: json
+        fields:
+          - label: Integrantes
+            name: items
+            widget: list
+            required: false
+            summary: '{{fields.name}} — {{fields.role}}'
+            fields:
+              - { label: Nombre, name: name, widget: string }
+              - { label: Cargo, name: role, widget: string }
+              - { label: Área, name: area, widget: string, required: false }
+              - { label: Biografía, name: bio, widget: text, required: false }
+              - { label: Fotografía, name: imageSrc, widget: image, required: false }
+              - { label: LinkedIn, name: linkedinUrl, widget: string, required: false }
+
+      - name: metrics
+        label: Métricas
+        file: src/content/metrics.json
+        format: json
+        fields:
+          - label: Métricas
+            name: items
+            widget: list
+            required: false
+            summary: '{{fields.value}} {{fields.label}}'
+            fields:
+              - { label: Valor, name: value, widget: string }
+              - { label: Descripción, name: label, widget: string }
+
+      - name: partners
+        label: Alianzas
+        file: src/content/partners.json
+        format: json
+        fields:
+          - label: Organizaciones aliadas
+            name: items
+            widget: list
+            required: false
+            summary: '{{fields.name}}'
+            fields:
+              - { label: Nombre, name: name, widget: string }
+              - { label: Sitio web, name: url, widget: string, required: false }
+
+      - name: press
+        label: Prensa
+        file: src/content/press.json
+        format: json
+        fields:
+          - label: Apariciones en medios
+            name: items
+            widget: list
+            required: false
+            summary: '{{fields.outlet}} — {{fields.title}}'
+            fields:
+              - { label: Título, name: title, widget: string }
+              - { label: Medio, name: outlet, widget: string }
+              - { label: Fecha, name: publishedAt, widget: date, format: YYYY-MM-DD }
+              - { label: Enlace, name: url, widget: string }
+              - { label: Resumen, name: excerpt, widget: text, required: false }

@@ -1,4 +1,4 @@
 import type { PressMention } from '@/models/content';
+import content from '@/content/press.json';
 
-// Permanece vacío hasta recibir apariciones verificables en medios.
-export const press: PressMention[] = [];
+export const press = content.items as PressMention[];

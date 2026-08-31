@@ -1,7 +1,4 @@
 import type { Partner } from '@/models/content';
+import content from '@/content/partners.json';
 
-export const partners: Partner[] = [
-  { name: 'Aliado por confirmar', isDemo: true },
-  { name: 'Institución por confirmar', isDemo: true },
-  { name: 'Empresa por confirmar', isDemo: true },
-];
+export const partners = content.items as Partner[];

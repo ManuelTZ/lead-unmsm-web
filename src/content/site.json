@@ -1,0 +1,15 @@
+{
+  "name": "LEAD UNMSM",
+  "description": "Comunidad universitaria orientada a STEM, liderazgo, innovación e impacto desde la UNMSM.",
+  "application": {
+    "open": false,
+    "formUrl": "",
+    "deadline": ""
+  },
+  "contactFormUrl": "",
+  "socials": {
+    "instagram": "https://www.instagram.com/lead_unmsm/",
+    "linkedin": "https://www.linkedin.com/company/lead-unmsm",
+    "tiktok": ""
+  }
+}

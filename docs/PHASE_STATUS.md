@@ -2,18 +2,18 @@
 
 Este archivo se actualiza al cerrar cada PR.
 
-| Fase           | Estado inicial                                                                                       | Gate principal                  |
-| -------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------- |
-| 0. Fundaciones | 2026-08-15: `npm run verify` y CI del PR #1 verdes; repositorio sincronizado con GitHub              | `npm run verify`                |
-| 1. Navegación  | 2026-08-15: seis rutas y encabezados principales verificados en desktop y móvil                      | E2E desktop + móvil             |
-| 2. Eventos     | 2026-08-15: inscripción por evento y estados sin formulario/pasado cubiertos; faltan URLs oficiales  | unit + E2E; CTA real pendiente  |
-| 3. Countdown   | 2026-08-15: visible en Inicio y estados activo/expirado/inválido cubiertos; falta fecha oficial      | Vitest + E2E; fecha pendiente   |
-| 4. Perfil      | 2026-08-15: scoring, empate, aviso provisional, resultado y CTA cubiertos en desktop/móvil           | Vitest + E2E                    |
-| 5. Noticias    | 2026-08-15: listado, detalles y navegación verificados en desktop/móvil; contenido oficial pendiente | unit + E2E; contenido pendiente |
-| 6. CMS         | 2026-08-17: base local completa y CMS diferido hasta definir responsable operativo                   | unit + E2E; CMS diferido        |
-| 7. UX/UI final | 2026-08-17: salto por teclado y página actual accesible en desktop/móvil; validación UX pendiente    | E2E; investigación pendiente    |
-| 8. Lanzamiento | No iniciado                                                                                          | checklist calidad               |
-| 9. Handover    | No iniciado                                                                                          | documentación + accesos         |
+| Fase           | Estado inicial                                                                                    | Gate principal                  |
+| -------------- | ------------------------------------------------------------------------------------------------- | ------------------------------- |
+| 0. Fundaciones | 2026-08-15: `npm run verify` y CI del PR #1 verdes; repositorio sincronizado con GitHub           | `npm run verify`                |
+| 1. Navegación  | 2026-08-15: seis rutas y encabezados principales verificados en desktop y móvil                   | E2E desktop + móvil             |
+| 2. Eventos     | 2026-08-30: estado vacío oficial y colección CMS listos; falta recibir el primer evento           | unit + E2E; CTA real pendiente  |
+| 3. Countdown   | 2026-08-30: comunica convocatoria cerrada; apertura y fechas quedan administrables                | Vitest + E2E; fecha pendiente   |
+| 4. Perfil      | 2026-08-15: scoring, empate, aviso provisional, resultado y CTA cubiertos en desktop/móvil        | Vitest + E2E                    |
+| 5. Noticias    | 2026-08-30: estado vacío oficial y colección CMS listos; falta la primera publicación             | unit + E2E; contenido pendiente |
+| 6. CMS         | 2026-08-30: Decap, contenido JSON y Netlify configurados; falta activar Identity y Git Gateway    | unit + E2E; alta externa        |
+| 7. UX/UI final | 2026-08-17: salto por teclado y página actual accesible en desktop/móvil; validación UX pendiente | E2E; investigación pendiente    |
+| 8. Lanzamiento | 2026-08-30: SEO, accesibilidad, enlaces y Netlify preparados; falta despliegue público            | unit + E2E; checklist pendiente |
+| 9. Handover    | 2026-08-30: guía de Netlify/CMS creada; falta registrar propietarios y realizar transferencia     | documentación + accesos         |
 
 ## Regla de actualización
 

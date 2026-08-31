@@ -7,12 +7,13 @@ Base de proyecto creada para desarrollar la web de LEAD UNMSM con una metodolog�
 - Astro + TypeScript, salida estática.
 - Diseño inicial sobrio negro/rosa, deliberadamente distinto del referente LEAD UNI.
 - Páginas: Inicio, Eventos, Noticias, Nosotros, Alianzas y Test de perfil.
-- Datos demo tipados y desacoplados de la UI.
+- Contenido JSON tipado, desacoplado de la UI y administrable desde Decap CMS.
 - Countdown y test de perfil como funciones testeables.
 - Vitest para pruebas unitarias.
 - Playwright para pruebas end-to-end desktop y móvil.
 - CI de GitHub Actions.
 - `AGENTS.md` para que Codex respete la metodología del repositorio.
+- Configuración de Netlify para despliegues verificados.
 - Roadmap por fases y prompts listos para Codex.
 
 ## 1. Requisitos
@@ -61,13 +62,11 @@ Abrir PR, revisar CI y fusionar solo con todas las pruebas verdes.
 
 ## 5. Contenido editable
 
-Durante las primeras fases los datos viven en `src/data`. Es intencional: permite validar navegación, eventos, noticias y test sin pagar ni depender de un CMS.
-
-En Fase 6 se conecta un CMS. La opción recomendada en la propuesta es Sanity; la capa `src/services/content` está preparada para sustituir el repositorio local sin rehacer los componentes.
+El contenido administrable vive en `src/content` y la web lo consume mediante la capa `src/services/content`. Decap CMS ofrece el panel `/admin/`; la activación gratuita en Netlify y el flujo para invitar editores están documentados en `docs/08-netlify-cms.md`.
 
 ## 6. Marca
 
-No se incluye el logo de LEAD UNI. Cuando tengas los archivos oficiales de LEAD UNMSM, colócalos en `public/brand/` siguiendo `public/brand/README.md`.
+Los logos oficiales confirmados están en `public/brand/`. Las reglas de uso y sustitución están documentadas en `public/brand/README.md`.
 
 ## Documentación
 
@@ -77,7 +76,8 @@ Empieza por:
 2. `docs/01-roadmap.md`
 3. `docs/06-codex-prompts.md`
 4. `docs/07-github-workflow.md`
+5. `docs/08-netlify-cms.md`
 
 ## Estado
 
-Este repositorio es un **starter funcional/prototipo**. Los textos, cifras y eventos están marcados como demostración y deben sustituirse por información oficial antes de publicar.
+Este repositorio es un **prototipo funcional listo para conectar a Netlify**. No publica eventos, noticias, cifras ni integrantes inventados. Los textos institucionales provisionales deben aprobarse antes de permitir la indexación.

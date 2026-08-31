@@ -1,14 +1,3 @@
-export const homeContent = {
-  eyebrow: 'Propuesta institucional · contenido demo',
-  title: 'Liderazgo STEM para crear impacto desde San Marcos.',
-  introduction:
-    'Conectamos estudiantes con aprendizaje, comunidad y oportunidades para convertir ideas en iniciativas con propósito.',
-  primaryAction: {
-    label: 'Explorar eventos',
-    href: '/eventos',
-  },
-  secondaryAction: {
-    label: 'Conocer LEAD UNMSM',
-    href: '/nosotros',
-  },
-} as const;
+import content from '@/content/home.json';
+
+export const homeContent = content;

@@ -2,19 +2,28 @@
 interface Props {
   deadline: string;
   label?: string;
+  isOpen?: boolean;
 }
-const { deadline, label = 'Cierre de postulaciones' } = Astro.props;
+const { deadline, label = 'Convocatoria', isOpen = true } = Astro.props;
 ---
 
-<section class="countdown" data-countdown data-deadline={deadline} aria-live="polite">
+<section
+  class="countdown"
+  data-countdown
+  data-deadline={deadline}
+  data-open={String(isOpen)}
+  aria-label={label}
+>
   <p class="eyebrow">{label}</p>
-  <div class="units" data-units hidden>
+  <div class="units" data-units hidden role="timer" aria-label="Tiempo restante">
     <span><b data-days>0</b><small>días</small></span>
     <span><b data-hours>0</b><small>horas</small></span>
     <span><b data-minutes>0</b><small>min</small></span>
     <span><b data-seconds>0</b><small>seg</small></span>
   </div>
-  <p class="muted" data-status>Fecha pendiente de configurar.</p>
+  <p class="muted" data-status role="status" aria-atomic="true">
+    {isOpen ? 'Fecha pendiente de configurar.' : 'Actualmente no hay convocatoria abierta.'}
+  </p>
 </section>
 
 <script>
@@ -22,12 +31,21 @@ const { deadline, label = 'Cierre de postulaciones' } = Astro.props;
 
   document.querySelectorAll<HTMLElement>('[data-countdown]').forEach((root) => {
     const deadline = root.dataset.deadline ?? '';
+    const isOpen = root.dataset.open === 'true';
     const units = root.querySelector<HTMLElement>('[data-units]');
     const status = root.querySelector<HTMLElement>('[data-status]');
 
     const render = () => {
-      const state = getCountdownState(deadline);
       if (!status || !units) return false;
+
+      if (!isOpen) {
+        units.hidden = true;
+        status.hidden = false;
+        status.textContent = 'Actualmente no hay convocatoria abierta.';
+        return false;
+      }
+
+      const state = getCountdownState(deadline);
 
       if (!state.isValid) {
         units.hidden = true;
@@ -73,6 +91,9 @@ const { deadline, label = 'Cierre de postulaciones' } = Astro.props;
     grid-template-columns: repeat(4, minmax(64px, 1fr));
     gap: 8px;
     max-width: 420px;
+  }
+  .units[hidden] {
+    display: none;
   }
   .units span {
     border: 1px solid var(--ink-700);

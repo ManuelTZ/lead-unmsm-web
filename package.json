@@ -19,7 +19,8 @@
     "test:e2e": "npm run build && playwright test",
     "test:e2e:ci": "playwright test",
     "doctor": "node scripts/repo-doctor.mjs",
-    "verify": "npm run doctor && npm run format:check && npm run check && npm run test:unit && npm run build"
+    "check:links": "node scripts/check-links.mjs",
+    "verify": "npm run doctor && npm run format:check && npm run check && npm run test:unit && npm run build && npm run check:links"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",

@@ -17,7 +17,22 @@ const news = await contentRepository.listNews();
   </section>
   <section class="section toned">
     <div class="container">
-      <div class="grid news-list">{news.map((article) => <NewsCard article={article} />)}</div>
+      {
+        news.length > 0 ? (
+          <div class="grid news-list">
+            {news.map((article) => (
+              <NewsCard article={article} />
+            ))}
+          </div>
+        ) : (
+          <div class="empty-state" role="status">
+            <h2>Todavía no hay noticias publicadas.</h2>
+            <p class="muted">
+              Las novedades aparecerán aquí cuando el equipo editorial publique la primera.
+            </p>
+          </div>
+        )
+      }
     </div>
   </section>
 </BaseLayout>
@@ -28,6 +43,12 @@ const news = await contentRepository.listNews();
   }
   .news-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .empty-state {
+    max-width: 760px;
+  }
+  .empty-state h2 {
+    margin-top: 0;
   }
   @media (max-width: 720px) {
     .news-list {

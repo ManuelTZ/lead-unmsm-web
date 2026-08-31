@@ -1,3 +1,10 @@
 {
-  "items": []
+  "items": [
+    {
+      "name": "YO",
+      "role": "DIRECTO",
+      "area": "Desarrollo Profesional",
+      "imageSrc": "/uploads/images-4-.jpg"
+    }
+  ]
 }

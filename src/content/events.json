@@ -1,13 +1,3 @@
 {
-  "items": [
-    {
-      "slug": "evento1",
-      "title": "evento1",
-      "mode": "Presencial",
-      "location": "lima",
-      "excerpt": "evento01",
-      "registrationUrl": "prueba",
-      "status": "upcoming"
-    }
-  ]
+  "items": []
 }

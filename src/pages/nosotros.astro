@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { contentRepository } from '@/services/content/repository';
+
+const members = await contentRepository.listMembers();
 ---
 
 <BaseLayout title="Nosotros">
@@ -21,11 +24,51 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
         </p>
       </div><div class="card">
         <span class="tag">Equipo</span><h2>Leadership Team</h2><p class="muted">
-          En Fase 6 este bloque se alimentará desde CMS para facilitar el relevo anual.
+          Los perfiles del equipo se actualizan desde el panel editorial para facilitar el relevo
+          anual.
         </p>
       </div>
     </div>
   </section>
+  {
+    members.length > 0 && (
+      <section class="section" aria-labelledby="team-title">
+        <div class="container">
+          <p class="eyebrow">Nuestro equipo</p>
+          <h2 class="section-title" id="team-title">
+            Personas que impulsan LEAD UNMSM
+          </h2>
+          <div class="grid team-grid">
+            {members.map((member) => (
+              <article class="card member-card" data-member>
+                {member.imageSrc && (
+                  <img
+                    src={member.imageSrc}
+                    alt={`Fotografía de ${member.name}`}
+                    width="600"
+                    height="600"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+                <div class="member-copy">
+                  {member.area && <span class="tag">{member.area}</span>}
+                  <h3>{member.name}</h3>
+                  <p class="role">{member.role}</p>
+                  {member.bio && <p class="muted">{member.bio}</p>}
+                  {member.linkedinUrl && (
+                    <a href={member.linkedinUrl} target="_blank" rel="noreferrer">
+                      Ver perfil en LinkedIn
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
 </BaseLayout>
 <style>
   .toned {
@@ -39,8 +82,42 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     font-size: 2rem;
     margin: 16px 0 8px;
   }
+  .team-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 32px;
+  }
+  .member-card {
+    padding: 0;
+    overflow: hidden;
+  }
+  .member-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: var(--ink-800);
+  }
+  .member-copy {
+    padding: 24px;
+  }
+  .member-copy h3 {
+    margin: 14px 0 4px;
+    font-size: 1.45rem;
+  }
+  .member-copy .role {
+    margin: 0;
+    color: var(--rose-300);
+    font-weight: 800;
+  }
+  .member-copy a {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--rose-300);
+    font-weight: 800;
+  }
   @media (max-width: 720px) {
-    .columns {
+    .columns,
+    .team-grid {
       grid-template-columns: 1fr;
     }
   }

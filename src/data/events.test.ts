@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseEvents } from './events';
+import { parseEventFiles, parseEvents } from './events';
 
 const validEvent = {
   slug: 'encuentro-lead',
@@ -21,5 +21,20 @@ describe('parseEvents', () => {
     const { date: _date, ...eventWithoutDate } = validEvent;
 
     expect(parseEvents([eventWithoutDate])).toEqual([]);
+  });
+
+  it('deriva un slug único del nombre de cada archivo editorial', () => {
+    const { slug: _slug, ...eventWithoutSlug } = validEvent;
+
+    expect(
+      parseEventFiles({
+        '../../content/events/2026-09-15-encuentro-lead.json': eventWithoutSlug,
+      }),
+    ).toEqual([
+      {
+        ...eventWithoutSlug,
+        slug: '2026-09-15-encuentro-lead',
+      },
+    ]);
   });
 });

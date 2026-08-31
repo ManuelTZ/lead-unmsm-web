@@ -17,7 +17,7 @@ describe('configuración del CMS', () => {
     expect(config).toContain('publish_mode: editorial_workflow');
   });
 
-  it.each(['site', 'home', 'events', 'members', 'metrics', 'partners', 'press'])(
+  it.each(['site', 'home', 'members', 'metrics', 'partners', 'press'])(
     'expone la colección administrable %s',
     (collection) => {
       const config = read('public/admin/config.yml');
@@ -25,6 +25,15 @@ describe('configuración del CMS', () => {
       expect(config).toContain(`file: src/content/${collection}.json`);
     },
   );
+
+  it('configura Eventos como colección de archivos con slug automático', () => {
+    const config = read('public/admin/config.yml');
+
+    expect(config).toContain('folder: content/events');
+    expect(config).toContain("slug: '{{fields.date}}-{{slug}}'");
+    expect(config).not.toContain('file: src/content/events.json');
+    expect(existsSync('src/content/events.json')).toBe(false);
+  });
 
   it('configura Noticias como colección de archivos con slug automático', () => {
     const config = read('public/admin/config.yml');
@@ -41,9 +50,6 @@ describe('configuración del CMS', () => {
 
     expect(config).toContain(
       '{ label: Fecha, name: date, widget: date, format: YYYY-MM-DD, required: true }',
-    );
-    expect(config).toContain(
-      '{ label: Identificador URL, name: slug, widget: string, required: true }',
     );
   });
 

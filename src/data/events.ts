@@ -1,5 +1,4 @@
 import type { LeadEvent } from '@/models/content';
-import content from '@/content/events.json';
 
 const eventModes = new Set<LeadEvent['mode']>(['Presencial', 'Virtual', 'Híbrido']);
 const eventStatuses = new Set<LeadEvent['status']>(['upcoming', 'past']);
@@ -33,4 +32,23 @@ const isLeadEvent = (value: unknown): value is LeadEvent => {
 export const parseEvents = (items: unknown): LeadEvent[] =>
   Array.isArray(items) ? items.filter(isLeadEvent) : [];
 
-export const events = parseEvents(content.items);
+const slugFromPath = (path: string): string => {
+  const filename = path.split(/[\\/]/).at(-1) ?? '';
+  return filename.replace(/\.json$/i, '');
+};
+
+export const parseEventFiles = (files: Record<string, unknown>): LeadEvent[] =>
+  parseEvents(
+    Object.entries(files).map(([path, event]) =>
+      event && typeof event === 'object'
+        ? { ...(event as Record<string, unknown>), slug: slugFromPath(path) }
+        : event,
+    ),
+  );
+
+const eventFiles = import.meta.glob('../../content/events/*.json', {
+  eager: true,
+  import: 'default',
+});
+
+export const events = parseEventFiles(eventFiles);

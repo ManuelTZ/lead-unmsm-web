@@ -109,3 +109,9 @@ Los archivos generados por Decap CMS se validan antes de exponerlos al repositor
 **Estado:** aceptado.
 
 Noticias usa una colección de carpeta de Decap CMS en `content/news/`, fuera del directorio reservado por Astro para sus colecciones. Cada publicación se guarda como un JSON independiente y su ruta se deriva del nombre generado con fecha y título (`{{fields.publishedAt}}-{{slug}}`). Los editores ya no escriben el slug, dos noticias no pueden compartir la misma ruta de archivo y las ediciones simultáneas dejan de competir por un único `news.json`.
+
+## ADR-019 — Un evento por archivo con slug automático
+
+**Estado:** aceptado.
+
+Eventos usa una colección de carpeta de Decap CMS en `content/events/`. Cada evento se guarda como un JSON independiente y su ruta se deriva del nombre generado con fecha y título (`{{fields.date}}-{{slug}}`). Los editores ya no escriben el slug y las ediciones de eventos distintos no modifican un archivo compartido.

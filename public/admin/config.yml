@@ -130,7 +130,15 @@ collections:
     summary: '{{date}} — {{title}}'
     fields:
       - { label: Título, name: title, widget: string, required: true }
-      - { label: Fecha, name: date, widget: date, format: YYYY-MM-DD, required: true }
+      - {
+          label: Fecha,
+          name: date,
+          widget: datetime,
+          date_format: YYYY-MM-DD,
+          time_format: false,
+          format: YYYY-MM-DD,
+          required: true,
+        }
       - label: Modalidad
         name: mode
         widget: select

@@ -48,8 +48,8 @@ describe('configuración del CMS', () => {
   it('exige los datos necesarios para publicar un evento', () => {
     const config = read('public/admin/config.yml');
 
-    expect(config).toContain(
-      '{ label: Fecha, name: date, widget: date, format: YYYY-MM-DD, required: true }',
+    expect(config).toMatch(
+      /label: Fecha,\s+name: date,\s+widget: datetime,\s+date_format: YYYY-MM-DD,\s+time_format: false,\s+format: YYYY-MM-DD,\s+required: true(?:,|\s*})/,
     );
   });
 

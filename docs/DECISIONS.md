@@ -114,4 +114,4 @@ Noticias usa una colección de carpeta de Decap CMS en `content/news/`, fuera de
 
 **Estado:** aceptado.
 
-Eventos usa una colección de carpeta de Decap CMS en `content/events/`. Cada evento se guarda como un JSON independiente y su ruta se deriva del nombre generado con fecha y título (`{{fields.date}}-{{slug}}`). Los editores ya no escriben el slug y las ediciones de eventos distintos no modifican un archivo compartido.
+Eventos usa una colección de carpeta de Decap CMS en `content/events/`. Cada evento se guarda como un JSON independiente y su ruta se deriva del nombre generado con fecha y título (`{{fields.date}}-{{slug}}`). Los editores ya no escriben el slug y las ediciones de eventos distintos no modifican un archivo compartido. La fecha usa el widget nativo `datetime` con la hora desactivada y se persiste como `YYYY-MM-DD`, porque Decap CMS no incluye un widget nativo llamado `date`.

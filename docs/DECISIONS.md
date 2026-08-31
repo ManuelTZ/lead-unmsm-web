@@ -97,3 +97,9 @@ El control del menú conserva el elemento nativo `details/summary`, identifica e
 La primera publicación usará el plan gratuito de Netlify con su subdominio `netlify.app`, y Decap CMS con Identity y Git Gateway en modo de invitación. Los editores administran archivos JSON desde `/admin/` sin tocar código ni recibir acceso directo a GitHub. La solución conserva el sitio estático, evita una base de datos y permite transferir el contenido junto con el repositorio.
 
 El límite mensual de créditos de Netlify se vigilará y los cambios editoriales se agruparán. Si el volumen supera el plan gratuito, se reevaluará el hosting sin cambiar los modelos de contenido ni los componentes.
+
+## ADR-017 — El contenido editorial se valida al leerlo
+
+**Estado:** aceptado.
+
+Los archivos generados por Decap CMS se validan antes de exponerlos al repositorio de contenido. Una entrada incompleta se omite del build en lugar de derribar todo el despliegue, mientras los campos necesarios también se marcan explícitamente como obligatorios en el panel. Las pruebas aceptan colecciones vacías o con contenido válido para no bloquear futuras publicaciones reales.

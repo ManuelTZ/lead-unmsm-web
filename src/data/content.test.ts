@@ -5,8 +5,16 @@ import { news } from './news';
 const unique = (values: string[]) => new Set(values).size === values.length;
 
 describe('contenido local', () => {
-  it('no inventa eventos mientras no exista una agenda oficial', () => {
-    expect(events).toEqual([]);
+  it('solo expone eventos completos publicados desde el CMS', () => {
+    expect(
+      events.every(
+        (event) =>
+          event.slug.length > 0 &&
+          event.title.length > 0 &&
+          event.location.length > 0 &&
+          event.excerpt.length > 0,
+      ),
+    ).toBe(true);
   });
 
   it('no inventa noticias mientras no exista contenido editorial oficial', () => {

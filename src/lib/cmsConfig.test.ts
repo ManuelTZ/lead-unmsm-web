@@ -26,6 +26,17 @@ describe('configuración del CMS', () => {
     },
   );
 
+  it('exige los datos necesarios para publicar un evento', () => {
+    const config = read('public/admin/config.yml');
+
+    expect(config).toContain(
+      '{ label: Fecha, name: date, widget: date, format: YYYY-MM-DD, required: true }',
+    );
+    expect(config).toContain(
+      '{ label: Identificador URL, name: slug, widget: string, required: true }',
+    );
+  });
+
   it('configura un build verificable y publicable en Netlify', () => {
     const netlify = read('netlify.toml');
 

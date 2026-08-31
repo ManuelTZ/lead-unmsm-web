@@ -12,7 +12,11 @@ test('nosotros muestra los integrantes publicados desde el CMS', async ({ page }
   await expect(page.locator('[data-member]')).toHaveCount(members.items.length);
 
   for (const member of members.items) {
-    await expect(page.getByRole('heading', { name: member.name })).toBeVisible();
-    await expect(page.getByText(member.role, { exact: true })).toBeVisible();
+    const memberCard = page.locator('[data-member]').filter({
+      has: page.getByRole('heading', { name: member.name, exact: true }),
+    });
+
+    await expect(memberCard).toHaveCount(1);
+    await expect(memberCard.locator('.role')).toHaveText(member.role);
   }
 });

@@ -115,3 +115,11 @@ Noticias usa una colección de carpeta de Decap CMS en `content/news/`, fuera de
 **Estado:** aceptado.
 
 Eventos usa una colección de carpeta de Decap CMS en `content/events/`. Cada evento se guarda como un JSON independiente y su ruta se deriva del nombre generado con fecha y título (`{{fields.date}}-{{slug}}`). Los editores ya no escriben el slug y las ediciones de eventos distintos no modifican un archivo compartido. La fecha usa el widget nativo `datetime` con la hora desactivada y se persiste como `YYYY-MM-DD`, porque Decap CMS no incluye un widget nativo llamado `date`.
+
+## ADR-020 — Los JSON administrados por Decap no pasan por el gate estilístico
+
+**Estado:** aceptado.
+
+Los archivos JSON de content/ y src/content/ son serializados por Decap CMS y pueden diferir del estilo de Prettier sin dejar de ser válidos. Se excluyen de format:check para que una diferencia puramente estilística no bloquee el despliegue; su sintaxis sigue siendo comprobada por el build y su forma por los parsers y pruebas de contenido.
+
+Noticias usa el mismo widget datetime sin hora que Eventos y persiste publishedAt como YYYY-MM-DD. Así, Decap exige y conserva la fecha necesaria para generar el nombre del archivo y publicar la entrada.

@@ -57,9 +57,16 @@ describe('configuración del CMS', () => {
     const config = read('public/admin/config.yml');
 
     expect(config).toMatch(
-      /label: Fecha,\s+name: publishedAt,\s+widget: date,\s+format: YYYY-MM-DD,\s+required: true(?:,|\s*})/,
+      /label: Fecha,\s+name: publishedAt,\s+widget: datetime,\s+date_format: YYYY-MM-DD,\s+time_format: false,\s+format: YYYY-MM-DD,\s+required: true(?:,|\s*})/,
     );
     expect(config).toContain('{ label: Autor, name: author, widget: string, required: true }');
+  });
+
+  it('deja que Decap serialice su contenido JSON sin bloquear el gate de formato', () => {
+    const prettierIgnore = read('.prettierignore');
+
+    expect(prettierIgnore).toContain('content/**/*.json');
+    expect(prettierIgnore).toContain('src/content/*.json');
   });
 
   it('configura un build verificable y publicable en Netlify', () => {

@@ -1,9 +1,9 @@
 {
   "title": "NOTICIA01",
   "excerpt": "Aparición en RTV San Marcos",
+  "publishedAt": "2026-08-31",
   "author": "Krishna",
   "category": "Prueba",
-  "body": [
-    "Hola esto es una prueba\nperrovaca"
-  ]
+  "body": ["Hola esto es una prueba\nperrovaca"],
+  "isDemo": true
 }

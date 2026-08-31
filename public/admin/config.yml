@@ -169,7 +169,15 @@ collections:
     fields:
       - { label: Título, name: title, widget: string, required: true }
       - { label: Resumen, name: excerpt, widget: text, required: true }
-      - { label: Fecha, name: publishedAt, widget: date, format: YYYY-MM-DD, required: true }
+      - {
+          label: Fecha,
+          name: publishedAt,
+          widget: datetime,
+          date_format: YYYY-MM-DD,
+          time_format: false,
+          format: YYYY-MM-DD,
+          required: true,
+        }
       - { label: Autor, name: author, widget: string, required: true }
       - { label: Categoría, name: category, widget: string, required: true }
       - label: Párrafos

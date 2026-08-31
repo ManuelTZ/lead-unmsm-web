@@ -3,3 +3,7 @@ dist
 .astro
 playwright-report
 test-results
+
+# Decap CMS serializa estos JSON; el build valida su sintaxis y contenido.
+content/**/*.json
+src/content/*.json

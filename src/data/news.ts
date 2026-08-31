@@ -1,5 +1,4 @@
 import type { NewsArticle } from '@/models/content';
-import content from '@/content/news.json';
 
 const isNonEmptyString = (value: unknown): value is string =>
   typeof value === 'string' && value.trim().length > 0;
@@ -31,4 +30,23 @@ const isNewsArticle = (value: unknown): value is NewsArticle => {
 export const parseNews = (items: unknown): NewsArticle[] =>
   Array.isArray(items) ? items.filter(isNewsArticle) : [];
 
-export const news = parseNews(content.items);
+const slugFromPath = (path: string): string => {
+  const filename = path.split(/[\\/]/).at(-1) ?? '';
+  return filename.replace(/\.json$/i, '');
+};
+
+export const parseNewsFiles = (files: Record<string, unknown>): NewsArticle[] =>
+  parseNews(
+    Object.entries(files).map(([path, article]) =>
+      article && typeof article === 'object'
+        ? { ...(article as Record<string, unknown>), slug: slugFromPath(path) }
+        : article,
+    ),
+  );
+
+const newsFiles = import.meta.glob('../../content/news/*.json', {
+  eager: true,
+  import: 'default',
+});
+
+export const news = parseNewsFiles(newsFiles);

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseNews } from './news';
+import { parseNews, parseNewsFiles } from './news';
 
 const validArticle = {
   slug: 'primera-noticia',
@@ -20,5 +20,20 @@ describe('parseNews', () => {
     const { publishedAt: _publishedAt, ...articleWithoutDate } = validArticle;
 
     expect(parseNews([articleWithoutDate])).toEqual([]);
+  });
+
+  it('deriva un slug único del nombre de cada archivo editorial', () => {
+    const { slug: _slug, ...articleWithoutSlug } = validArticle;
+
+    expect(
+      parseNewsFiles({
+        '../../content/news/2026-09-20-primera-noticia.json': articleWithoutSlug,
+      }),
+    ).toEqual([
+      {
+        ...articleWithoutSlug,
+        slug: '2026-09-20-primera-noticia',
+      },
+    ]);
   });
 });

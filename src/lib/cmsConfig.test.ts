@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 const read = (path: string) => readFileSync(path, 'utf8');
@@ -17,7 +17,7 @@ describe('configuración del CMS', () => {
     expect(config).toContain('publish_mode: editorial_workflow');
   });
 
-  it.each(['site', 'home', 'events', 'news', 'members', 'metrics', 'partners', 'press'])(
+  it.each(['site', 'home', 'events', 'members', 'metrics', 'partners', 'press'])(
     'expone la colección administrable %s',
     (collection) => {
       const config = read('public/admin/config.yml');
@@ -25,6 +25,16 @@ describe('configuración del CMS', () => {
       expect(config).toContain(`file: src/content/${collection}.json`);
     },
   );
+
+  it('configura Noticias como colección de archivos con slug automático', () => {
+    const config = read('public/admin/config.yml');
+
+    expect(config).toContain('folder: content/news');
+    expect(config).toContain('create: true');
+    expect(config).toContain("slug: '{{fields.publishedAt}}-{{slug}}'");
+    expect(config).not.toContain('file: src/content/news.json');
+    expect(existsSync('src/content/news.json')).toBe(false);
+  });
 
   it('exige los datos necesarios para publicar un evento', () => {
     const config = read('public/admin/config.yml');
@@ -41,7 +51,7 @@ describe('configuración del CMS', () => {
     const config = read('public/admin/config.yml');
 
     expect(config).toMatch(
-      /label: Fecha,\s+name: publishedAt,\s+widget: date,\s+format: YYYY-MM-DD,\s+required: true,/,
+      /label: Fecha,\s+name: publishedAt,\s+widget: date,\s+format: YYYY-MM-DD,\s+required: true(?:,|\s*})/,
     );
     expect(config).toContain('{ label: Autor, name: author, widget: string, required: true }');
   });

@@ -103,3 +103,9 @@ El límite mensual de créditos de Netlify se vigilará y los cambios editoriale
 **Estado:** aceptado.
 
 Los archivos generados por Decap CMS se validan antes de exponerlos al repositorio de contenido. Una entrada incompleta se omite del build en lugar de derribar todo el despliegue, mientras los campos necesarios también se marcan explícitamente como obligatorios en el panel. Las pruebas aceptan colecciones vacías o con contenido válido para no bloquear futuras publicaciones reales.
+
+## ADR-018 — Una noticia por archivo con slug automático
+
+**Estado:** aceptado.
+
+Noticias usa una colección de carpeta de Decap CMS en `content/news/`, fuera del directorio reservado por Astro para sus colecciones. Cada publicación se guarda como un JSON independiente y su ruta se deriva del nombre generado con fecha y título (`{{fields.publishedAt}}-{{slug}}`). Los editores ya no escriben el slug, dos noticias no pueden compartir la misma ruta de archivo y las ediciones simultáneas dejan de competir por un único `news.json`.

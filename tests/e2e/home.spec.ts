@@ -74,6 +74,17 @@ test('la imagen social publica esta disponible', async ({ request }) => {
   expect(response.headers()['content-type']).toBe('image/png');
 });
 
+test('todas las páginas publican el favicon institucional', async ({ page, request }) => {
+  await page.goto('/');
+
+  await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', '/brand/favicon.png');
+  await expect(page.locator('link[rel="icon"]')).toHaveAttribute('type', 'image/png');
+
+  const response = await request.get('/brand/favicon.png');
+  expect(response.ok()).toBe(true);
+  expect(response.headers()['content-type']).toBe('image/png');
+});
+
 test('el encabezado muestra el logo oficial', async ({ page }) => {
   await page.goto('/');
 

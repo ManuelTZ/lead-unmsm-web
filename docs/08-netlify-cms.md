@@ -36,6 +36,22 @@ No guardar contraseñas, tokens de Netlify ni accesos de GitHub dentro del repos
 
 Conviene agrupar correcciones relacionadas en una publicación. El plan Free usa un límite mensual de créditos y cada despliegue de producción consume créditos.
 
+## Entrega del formulario de contacto
+
+El formulario de Inicio se detecta automáticamente durante el deploy porque usa Netlify Forms; no requiere un backend propio. Después del primer despliegue que incluya el formulario:
+
+1. Entrar al proyecto en Netlify y abrir **Forms**.
+2. Seleccionar `contacto-lead-unmsm`.
+3. Abrir **Form notifications → Add notification → Email notification**.
+4. Configurar `leadunmsm@gmail.com` como destinatario y guardar.
+5. Enviar un mensaje de prueba desde el dominio publicado y confirmar recepción y carpeta de spam.
+
+El correo visible y los asuntos se editan desde **Contenido institucional → Contáctanos — solo Inicio**. Cambiar el correo visible no modifica por sí solo el destinatario de Netlify; ambas configuraciones deben mantenerse sincronizadas.
+
+## Organización del panel
+
+El panel usa los mismos nombres principales que la web y añade iconos para reconocer Inicio, Eventos, Noticias, Nosotros, Alianzas, Contacto y Popups. En **Inicio → Secciones de Inicio** cada bloque puede añadirse, reordenarse, ocultarse o eliminarse. Los tipos disponibles reutilizan los datos oficiales de Eventos, Noticias y Equipo, por lo que no duplican contenido.
+
 ## Antes del lanzamiento indexable
 
 - reemplazar los textos provisionales;

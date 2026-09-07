@@ -1,0 +1,205 @@
+---
+import EventCard from '@/components/EventCard.astro';
+import NewsCard from '@/components/NewsCard.astro';
+import type { HomeSection } from '@/data/home';
+import type { LeadEvent, Member, NewsArticle } from '@/models/content';
+
+interface Props {
+  sections: HomeSection[];
+  events: LeadEvent[];
+  news: NewsArticle[];
+  members: Member[];
+}
+
+const { sections, events, news, members } = Astro.props;
+const visibleSections = sections.filter((section) => section.enabled);
+const upcomingEvents = events
+  .filter((event) => event.status === 'upcoming')
+  .sort((left, right) => left.date.localeCompare(right.date))
+  .slice(0, 3);
+const latestNews = [...news]
+  .sort((left, right) => right.publishedAt.localeCompare(left.publishedAt))
+  .slice(0, 3);
+const featuredMembers = members.slice(0, 3);
+---
+
+{
+  visibleSections.map((section, index) => (
+    <section
+      class:list={['home-section', 'section', { toned: index % 2 === 0 }]}
+      data-home-section={section.sectionType}
+      aria-labelledby={`home-${section.sectionType}-title`}
+    >
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">{section.eyebrow}</p>
+            <h2 class="section-title" id={`home-${section.sectionType}-title`}>
+              {section.title}
+            </h2>
+            <p class="section-copy">{section.introduction}</p>
+          </div>
+          {section.sectionType === 'events' && (
+            <a class="button button-secondary" href="/eventos">
+              Ver todos los eventos
+            </a>
+          )}
+          {section.sectionType === 'news' && (
+            <a class="button button-secondary" href="/noticias">
+              Ver todas las noticias
+            </a>
+          )}
+          {section.sectionType === 'team' && (
+            <a class="button button-secondary" href="/nosotros">
+              Conocer al equipo
+            </a>
+          )}
+        </div>
+
+        {section.sectionType === 'events' && (
+          <div class="grid grid-3 content-grid">
+            {upcomingEvents.length > 0 ? (
+              upcomingEvents.map((event) => <EventCard event={event} />)
+            ) : (
+              <p class="card muted empty-card">Actualmente no hay eventos próximos publicados.</p>
+            )}
+          </div>
+        )}
+
+        {section.sectionType === 'news' && (
+          <div class="grid grid-3 content-grid">
+            {latestNews.length > 0 ? (
+              latestNews.map((article) => <NewsCard article={article} />)
+            ) : (
+              <p class="card muted empty-card">Todavía no hay noticias publicadas.</p>
+            )}
+          </div>
+        )}
+
+        {section.sectionType === 'team' && (
+          <div class="grid grid-3 content-grid">
+            {featuredMembers.length > 0 ? (
+              featuredMembers.map((member) => (
+                <article class="card member-card">
+                  {member.imageSrc && (
+                    <img
+                      src={member.imageSrc}
+                      alt={`Fotografía de ${member.name}`}
+                      width="600"
+                      height="600"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  <div class="member-copy">
+                    {member.area && <span class="tag">{member.area}</span>}
+                    <h3>{member.name}</h3>
+                    <p>{member.role}</p>
+                  </div>
+                </article>
+              ))
+            ) : (
+              <p class="card muted empty-card">
+                El equipo se publicará cuando existan datos oficiales.
+              </p>
+            )}
+          </div>
+        )}
+
+        {section.sectionType === 'alliances' && (
+          <a class="feature-link card" href="/alianzas">
+            <span>Explorar alianzas</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        )}
+      </div>
+    </section>
+  ))
+}
+
+<style>
+  .home-section {
+    border-top: 1px solid var(--ink-800);
+  }
+
+  .toned {
+    background: #0c0c10;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .section-heading > div {
+    max-width: 760px;
+  }
+
+  .content-grid {
+    margin-top: 32px;
+  }
+
+  .empty-card {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+
+  .member-card {
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .member-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: var(--ink-800);
+  }
+
+  .member-copy {
+    padding: 22px;
+  }
+
+  .member-copy h3 {
+    margin: 14px 0 2px;
+    font-size: 1.4rem;
+  }
+
+  .member-copy p {
+    margin: 0;
+    color: var(--rose-300);
+    font-weight: 800;
+  }
+
+  .feature-link {
+    display: flex;
+    min-height: 132px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 32px;
+    color: var(--white);
+    text-decoration: none;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 850;
+  }
+
+  .feature-link:hover {
+    border-color: var(--rose-500);
+    color: var(--rose-200);
+  }
+
+  @media (max-width: 760px) {
+    .section-heading {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .section-heading .button {
+      align-self: flex-start;
+    }
+  }
+</style>

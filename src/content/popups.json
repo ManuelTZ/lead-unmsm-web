@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "id": "alianzas-demo",
+      "enabled": true,
+      "path": "/alianzas",
+      "title": "Conversemos sobre alianzas",
+      "message": "Este popup es de demostración. Puedes editarlo, desactivarlo o eliminarlo desde el panel de administración.",
+      "actionLabel": "Ir a contacto",
+      "actionUrl": "/#contacto",
+      "delaySeconds": 1
+    }
+  ]
+}

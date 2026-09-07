@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 
 const members = JSON.parse(readFileSync('src/content/members.json', 'utf8')) as {
-  items: Array<{ name: string; role: string }>;
+  items: Array<{ name: string; role: string; imageSrc?: string }>;
 };
 
 test('nosotros muestra los integrantes publicados desde el CMS', async ({ page }) => {
@@ -18,5 +18,10 @@ test('nosotros muestra los integrantes publicados desde el CMS', async ({ page }
 
     await expect(memberCard).toHaveCount(1);
     await expect(memberCard.locator('.role')).toHaveText(member.role);
+    if (member.imageSrc) {
+      await expect(
+        memberCard.getByRole('img', { name: `Fotografía de ${member.name}` }),
+      ).toHaveAttribute('src', member.imageSrc);
+    }
   }
 });

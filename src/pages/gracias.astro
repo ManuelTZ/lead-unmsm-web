@@ -1,0 +1,33 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Mensaje recibido" showContact={false} noIndex>
+  <section class="section confirmation">
+    <div class="container card confirmation-card">
+      <p class="eyebrow">Gracias por escribirnos</p>
+      <h1 class="section-title">Mensaje recibido</h1>
+      <p class="section-copy">
+        El equipo de LEAD UNMSM revisará tu mensaje y responderá mediante el correo que registraste.
+      </p>
+      <a class="button button-primary" href="/">Volver al inicio</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .confirmation {
+    min-height: min(620px, calc(100svh - 190px));
+    display: grid;
+    align-items: center;
+  }
+
+  .confirmation-card {
+    max-width: 760px;
+    padding: clamp(28px, 6vw, 58px);
+  }
+
+  .confirmation-card .button {
+    margin-top: 20px;
+  }
+</style>

@@ -9,6 +9,8 @@ const validArticle = {
   author: 'Equipo LEAD UNMSM',
   category: 'Comunidad',
   body: ['Primer párrafo.', 'Segundo párrafo.'],
+  imageSrc: '/uploads/primera-noticia.webp',
+  imageAlt: 'Integrantes de LEAD UNMSM durante una actividad',
 };
 
 describe('parseNews', () => {
@@ -20,6 +22,18 @@ describe('parseNews', () => {
     const { publishedAt: _publishedAt, ...articleWithoutDate } = validArticle;
 
     expect(parseNews([articleWithoutDate])).toEqual([]);
+  });
+
+  it('ignora una imagen externa o sin texto alternativo', () => {
+    expect(
+      parseNews([
+        {
+          ...validArticle,
+          imageSrc: 'https://example.com/imagen.webp',
+          imageAlt: '',
+        },
+      ]),
+    ).toEqual([]);
   });
 
   it('deriva un slug único del nombre de cada archivo editorial', () => {

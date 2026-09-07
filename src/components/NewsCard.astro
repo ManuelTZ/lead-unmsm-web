@@ -8,18 +8,52 @@ const { article } = Astro.props;
 ---
 
 <article class="card news-card">
-  <div class="meta">
-    <span class="tag">{article.category}</span><span>{formatDate(article.publishedAt)}</span>
+  {
+    article.imageSrc && article.imageAlt && (
+      <a class="news-image" href={`/noticias/${article.slug}`} tabindex="-1" aria-hidden="true">
+        <img
+          src={article.imageSrc}
+          alt=""
+          width="800"
+          height="450"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+    )
+  }
+  <div class="news-copy">
+    <div class="meta">
+      <span class="tag">{article.category}</span><span>{formatDate(article.publishedAt)}</span>
+    </div>
+    <h3><a href={`/noticias/${article.slug}`}>{article.title}</a></h3>
+    <p class="muted">{article.excerpt}</p>
+    <span class="author">{article.author}</span>
   </div>
-  <h3><a href={`/noticias/${article.slug}`}>{article.title}</a></h3>
-  <p class="muted">{article.excerpt}</p>
-  <span class="author">{article.author}</span>
 </article>
 
 <style>
   .news-card {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+  }
+  .news-image {
+    display: block;
+  }
+  .news-image img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: var(--ink-800);
+  }
+  .news-copy {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 22px;
   }
   .meta {
     display: flex;

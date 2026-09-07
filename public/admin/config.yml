@@ -6,13 +6,16 @@ locale: es
 publish_mode: editorial_workflow
 media_folder: public/uploads
 public_folder: /uploads
+logo_url: /brand/lead-mark.png
+site_url: /
+display_url: https://lead-unmsm.netlify.app
 
 collections:
   - name: institutional
-    label: Contenido institucional
+    label: 🧭 Administración del sitio
     files:
       - name: site
-        label: Configuración general
+        label: ⚙️ Configuración general
         file: src/content/site.json
         format: json
         fields:
@@ -26,6 +29,7 @@ collections:
               - { label: Formulario de Google, name: formUrl, widget: string, required: false }
               - { label: Fecha de cierre, name: deadline, widget: datetime, required: false }
           - { label: Formulario de contacto, name: contactFormUrl, widget: string, required: false }
+          - { label: Enlace de LEAD Perú, name: leadPeruUrl, widget: string, required: true }
           - label: Redes sociales
             name: socials
             widget: object
@@ -35,7 +39,7 @@ collections:
               - { label: TikTok, name: tiktok, widget: string, required: false }
 
       - name: home
-        label: Página de inicio
+        label: 🏠 Inicio
         file: src/content/home.json
         format: json
         fields:
@@ -54,9 +58,113 @@ collections:
             fields:
               - { label: Texto, name: label, widget: string }
               - { label: Enlace, name: href, widget: string }
+          - label: Apariencia del encabezado principal
+            name: heroAppearance
+            widget: object
+            collapsed: false
+            fields:
+              - label: Fondo
+                name: backgroundType
+                widget: select
+                default: none
+                options:
+                  - { label: Sin fondo multimedia, value: none }
+                  - { label: Imagen, value: image }
+                  - { label: Video, value: video }
+              - label: Imagen de fondo o portada del video
+                name: backgroundImage
+                widget: image
+                required: false
+                hint: Se usa como fondo o como portada mientras carga el video.
+              - label: Video de fondo
+                name: backgroundVideo
+                widget: file
+                required: false
+                hint: Usa un archivo MP4 corto y optimizado para móviles.
+              - label: Mostrar luz y espiral difuminadas
+                name: animationEnabled
+                widget: boolean
+                default: true
+          - label: Secciones de Inicio
+            name: sections
+            widget: list
+            required: false
+            summary: '{{fields.sectionType}} — {{fields.title}}'
+            fields:
+              - label: Ventana o sección
+                name: sectionType
+                widget: select
+                options:
+                  - { label: 📅 Eventos, value: events }
+                  - { label: 🗞️ Noticias, value: news }
+                  - { label: 👥 Equipo, value: team }
+                  - { label: 🤝 Alianzas, value: alliances }
+              - { label: Mostrar sección, name: enabled, widget: boolean, default: true }
+              - { label: Etiqueta superior, name: eyebrow, widget: string, required: true }
+              - { label: Título, name: title, widget: string, required: true }
+              - { label: Introducción, name: introduction, widget: text, required: true }
+
+      - name: contact
+        label: ✉️ Contáctanos — solo Inicio
+        file: src/content/contact.json
+        format: json
+        fields:
+          - { label: Título, name: title, widget: string, required: true }
+          - { label: Introducción, name: introduction, widget: text, required: true }
+          - { label: Correo visible, name: email, widget: string, required: true }
+          - label: Asuntos disponibles
+            name: subjects
+            widget: list
+            required: true
+            min: 1
+            field: { label: Asunto, name: subject, widget: string, required: true }
+
+      - name: popups
+        label: 📣 Popups y avisos
+        file: src/content/popups.json
+        format: json
+        fields:
+          - label: Avisos
+            name: items
+            widget: list
+            required: false
+            summary: '{{fields.title}} — {{fields.path}}'
+            fields:
+              - {
+                  label: Identificador único,
+                  name: id,
+                  widget: string,
+                  hint: Usa minúsculas,
+                  números y guiones. Ejemplo: convocatoria-2026.,
+                }
+              - { label: Mostrar popup, name: enabled, widget: boolean, default: false }
+              - label: Página donde aparece
+                name: path
+                widget: select
+                default: '/'
+                options:
+                  - { label: Todas las páginas, value: '*' }
+                  - { label: Inicio, value: '/' }
+                  - { label: Eventos y detalles, value: '/eventos' }
+                  - { label: Noticias y detalles, value: '/noticias' }
+                  - { label: Nosotros, value: '/nosotros' }
+                  - { label: Alianzas, value: '/alianzas' }
+              - { label: Título, name: title, widget: string, required: true }
+              - { label: Mensaje, name: message, widget: text, required: true }
+              - { label: Texto del botón, name: actionLabel, widget: string, required: false }
+              - { label: Enlace del botón, name: actionUrl, widget: string, required: false }
+              - {
+                  label: Segundos antes de mostrar,
+                  name: delaySeconds,
+                  widget: number,
+                  value_type: int,
+                  min: 0,
+                  max: 30,
+                  default: 0,
+                }
 
       - name: members
-        label: Equipo
+        label: 👥 Nosotros — Equipo
         file: src/content/members.json
         format: json
         fields:
@@ -70,11 +178,11 @@ collections:
               - { label: Cargo, name: role, widget: string }
               - { label: Área, name: area, widget: string, required: false }
               - { label: Biografía, name: bio, widget: text, required: false }
-              - { label: Fotografía, name: imageSrc, widget: image, required: false }
+              - { label: Fotografía del integrante, name: imageSrc, widget: image, required: false }
               - { label: LinkedIn, name: linkedinUrl, widget: string, required: false }
 
       - name: metrics
-        label: Métricas
+        label: 📊 Nosotros — Métricas
         file: src/content/metrics.json
         format: json
         fields:
@@ -88,7 +196,7 @@ collections:
               - { label: Descripción, name: label, widget: string }
 
       - name: partners
-        label: Alianzas
+        label: 🤝 Alianzas
         file: src/content/partners.json
         format: json
         fields:
@@ -102,7 +210,7 @@ collections:
               - { label: Sitio web, name: url, widget: string, required: false }
 
       - name: press
-        label: Prensa
+        label: 📰 Nosotros — Prensa
         file: src/content/press.json
         format: json
         fields:
@@ -119,7 +227,7 @@ collections:
               - { label: Resumen, name: excerpt, widget: text, required: false }
 
   - name: events
-    label: Eventos
+    label: 📅 Eventos
     label_singular: Evento
     folder: content/events
     create: true
@@ -146,6 +254,14 @@ collections:
         options: [Presencial, Virtual, Híbrido]
       - { label: Ubicación, name: location, widget: string, required: true }
       - { label: Resumen, name: excerpt, widget: text, required: true }
+      - { label: Imagen principal del evento, name: imageSrc, widget: image, required: false }
+      - {
+          label: Descripción accesible de la imagen,
+          name: imageAlt,
+          widget: string,
+          required: false,
+          hint: Describe brevemente lo que aporta la imagen.,
+        }
       - { label: Formulario de inscripción, name: registrationUrl, widget: string, required: false }
       - label: Estado
         name: status
@@ -157,7 +273,7 @@ collections:
           - { label: Pasado, value: past }
 
   - name: news
-    label: Noticias
+    label: 🗞️ Noticias
     label_singular: Noticia
     folder: content/news
     create: true
@@ -180,6 +296,14 @@ collections:
         }
       - { label: Autor, name: author, widget: string, required: true }
       - { label: Categoría, name: category, widget: string, required: true }
+      - { label: Imagen principal de la noticia, name: imageSrc, widget: image, required: false }
+      - {
+          label: Descripción accesible de la imagen,
+          name: imageAlt,
+          widget: string,
+          required: false,
+          hint: Describe brevemente lo que aporta la imagen.,
+        }
       - label: Párrafos
         name: body
         widget: list

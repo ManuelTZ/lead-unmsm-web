@@ -1,4 +1,5 @@
 import type { LeadEvent } from '@/models/content';
+import { isLocalMediaPath } from '@/lib/media';
 
 const eventModes = new Set<LeadEvent['mode']>(['Presencial', 'Virtual', 'Híbrido']);
 const eventStatuses = new Set<LeadEvent['status']>(['upcoming', 'past']);
@@ -10,6 +11,11 @@ const isIsoDate = (value: unknown): value is string =>
   isNonEmptyString(value) &&
   /^\d{4}-\d{2}-\d{2}$/.test(value) &&
   !Number.isNaN(Date.parse(`${value}T12:00:00Z`));
+
+const hasValidOptionalImage = (event: Record<string, unknown>): boolean =>
+  event.imageSrc === undefined && event.imageAlt === undefined
+    ? true
+    : isLocalMediaPath(event.imageSrc) && isNonEmptyString(event.imageAlt);
 
 const isLeadEvent = (value: unknown): value is LeadEvent => {
   if (!value || typeof value !== 'object') return false;
@@ -24,6 +30,7 @@ const isLeadEvent = (value: unknown): value is LeadEvent => {
     isNonEmptyString(event.location) &&
     isNonEmptyString(event.excerpt) &&
     eventStatuses.has(event.status as LeadEvent['status']) &&
+    hasValidOptionalImage(event) &&
     (event.registrationUrl === undefined || typeof event.registrationUrl === 'string') &&
     (event.isDemo === undefined || typeof event.isDemo === 'boolean')
   );

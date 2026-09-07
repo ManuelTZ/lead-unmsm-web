@@ -9,6 +9,8 @@ const validEvent = {
   location: 'UNMSM',
   excerpt: 'Una actividad oficial.',
   registrationUrl: 'https://forms.google.com/example',
+  imageSrc: '/uploads/encuentro-lead.webp',
+  imageAlt: 'Estudiantes conversando durante el Encuentro LEAD',
   status: 'upcoming',
 };
 
@@ -21,6 +23,12 @@ describe('parseEvents', () => {
     const { date: _date, ...eventWithoutDate } = validEvent;
 
     expect(parseEvents([eventWithoutDate])).toEqual([]);
+  });
+
+  it('ignora una imagen sin texto alternativo', () => {
+    const { imageAlt: _imageAlt, ...eventWithoutImageAlt } = validEvent;
+
+    expect(parseEvents([eventWithoutImageAlt])).toEqual([]);
   });
 
   it('deriva un slug único del nombre de cada archivo editorial', () => {

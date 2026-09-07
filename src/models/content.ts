@@ -8,6 +8,8 @@ export interface LeadEvent {
   location: string;
   excerpt: string;
   registrationUrl?: string;
+  imageSrc?: string;
+  imageAlt?: string;
   status: 'upcoming' | 'past';
   isDemo?: boolean;
 }
@@ -20,6 +22,8 @@ export interface NewsArticle {
   author: string;
   category: string;
   body: string[];
+  imageSrc?: string;
+  imageAlt?: string;
   isDemo?: boolean;
 }
 

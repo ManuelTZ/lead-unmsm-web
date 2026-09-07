@@ -8,10 +8,10 @@ const required = [
   'src/pages/index.astro',
   'src/pages/eventos/index.astro',
   'src/pages/noticias/index.astro',
-  'src/pages/perfil.astro',
   'src/lib/countdown.test.ts',
-  'src/lib/quiz.test.ts',
   'tests/e2e/home.spec.ts',
+  'tests/e2e/contact.spec.ts',
+  'tests/e2e/popups.spec.ts',
   '.github/workflows/ci.yml',
 ];
 

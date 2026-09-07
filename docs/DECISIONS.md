@@ -123,3 +123,45 @@ Eventos usa una colección de carpeta de Decap CMS en `content/events/`. Cada ev
 Los archivos JSON de content/ y src/content/ son serializados por Decap CMS y pueden diferir del estilo de Prettier sin dejar de ser válidos. Se excluyen de format:check para que una diferencia puramente estilística no bloquee el despliegue; su sintaxis sigue siendo comprobada por el build y su forma por los parsers y pruebas de contenido.
 
 Noticias usa el mismo widget datetime sin hora que Eventos y persiste publishedAt como YYYY-MM-DD. Así, Decap exige y conserva la fecha necesaria para generar el nombre del archivo y publicar la entrada.
+
+## ADR-021 — Multimedia del hero administrable y con movimiento seguro
+
+**Estado:** aceptado.
+
+La portada permite elegir desde Decap entre ningún fondo, una imagen o un video local subido a `public/uploads`. El video usa una imagen de portada opcional, carga solo metadatos y no se reproduce cuando el usuario prefiere movimiento reducido. La animación decorativa usa una luz difuminada grande que aparece, se desplaza y da paso al trazado luminoso de una espiral; también es administrable, no expone contenido semántico y respeta `prefers-reduced-motion`.
+
+## ADR-022 — Imágenes editoriales locales con texto alternativo
+
+**Estado:** aceptado.
+
+Eventos y noticias pueden publicar una imagen principal subida por Decap, visible tanto en la tarjeta como en el detalle. Cada imagen editorial exige una descripción accesible y solo se aceptan rutas locales de `public/uploads` o `public/brand`; una configuración incompleta se omite junto con la entrada para no publicar contenido visual sin contexto. Equipo conserva su fotografía individual con texto alternativo derivado del nombre.
+
+## ADR-023 — LEAD Perú como enlace institucional administrable
+
+**Estado:** aceptado.
+
+La navegación muestra un botón externo hacia LEAD Perú en escritorio y móvil. Su URL vive en la configuración editorial, se valida como HTTPS y se abre en una pestaña nueva sin conceder acceso a la página de origen.
+
+## ADR-024 — Contacto mediante Netlify Forms
+
+**Estado:** aceptado.
+
+Solo Inicio termina con un formulario estático detectado por Netlify Forms, con campo trampa contra automatizaciones y página propia de confirmación. La entrega a `leadunmsm@gmail.com` se configura como notificación del formulario en Netlify, evitando un backend, credenciales o servicios adicionales dentro del repositorio.
+
+## ADR-025 — Popups editoriales limitados y descartables por sesión
+
+**Estado:** aceptado.
+
+Decap permite añadir, ordenar, activar y eliminar avisos con una página objetivo, demora y CTA opcional. Solo se muestra el primer aviso activo que coincide con la ruta; al cerrarlo queda descartado durante la sesión para evitar interrupciones repetidas. Los enlaces se restringen a rutas internas o HTTPS y el diálogo nativo conserva foco, teclado y cierre con Escape.
+
+## ADR-026 — Inicio compuesto por secciones tipadas y reordenables
+
+**Estado:** aceptado.
+
+Inicio incorpora una lista editorial de secciones permitidas: Eventos, Noticias, Equipo y Alianzas. Decap permite añadirlas, eliminarlas, ordenarlas y ocultarlas; el parser descarta tipos desconocidos y duplicados. Los bloques reutilizan las colecciones existentes y conservan textos introductorios editables, evitando un constructor de páginas arbitrario difícil de mantener.
+
+## ADR-027 — Retiro de la experiencia “Tu perfil”
+
+**Estado:** aceptado.
+
+La navegación, la portada, el CMS, el sitemap y la ruta pública dejan de exponer el test “Tu perfil”. También se eliminan su componente, datos, lógica y pruebas exclusivas para evitar mantener una funcionalidad fuera del alcance actual del producto.

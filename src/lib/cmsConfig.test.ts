@@ -17,7 +17,7 @@ describe('configuración del CMS', () => {
     expect(config).toContain('publish_mode: editorial_workflow');
   });
 
-  it.each(['site', 'home', 'members', 'metrics', 'partners', 'press'])(
+  it.each(['site', 'home', 'contact', 'popups', 'members', 'metrics', 'partners', 'press'])(
     'expone la colección administrable %s',
     (collection) => {
       const config = read('public/admin/config.yml');
@@ -25,6 +25,76 @@ describe('configuración del CMS', () => {
       expect(config).toContain(`file: src/content/${collection}.json`);
     },
   );
+
+  it('alinea el formulario exclusivo de Inicio con una sección Contacto en el CMS', () => {
+    const config = read('public/admin/config.yml');
+
+    expect(config).toContain('label: ✉️ Contáctanos — solo Inicio');
+    expect(config).toContain('name: introduction');
+    expect(config).toContain('name: email');
+    expect(config).toContain('name: subjects');
+  });
+
+  it('permite añadir, ordenar y eliminar popups desde el CMS', () => {
+    const config = read('public/admin/config.yml');
+
+    expect(config).toContain('label: 📣 Popups y avisos');
+    expect(config).toContain('name: popups');
+    expect(config).toContain('label: Avisos');
+    expect(config).toContain('name: items');
+    expect(config).toContain('name: delaySeconds');
+  });
+
+  it('permite administrar el fondo y la animación del hero', () => {
+    const config = read('public/admin/config.yml');
+
+    expect(config).toContain('name: heroAppearance');
+    expect(config).toContain('name: backgroundType');
+    expect(config).toContain('name: backgroundImage');
+    expect(config).toContain('name: backgroundVideo');
+    expect(config).toContain('name: animationEnabled');
+    expect(config).toContain('label: Mostrar luz y espiral difuminadas');
+  });
+
+  it('presenta el panel con marca, iconos y nombres alineados con la web', () => {
+    const config = read('public/admin/config.yml');
+
+    expect(config).toContain('logo_url: /brand/lead-mark.png');
+    expect(config).toContain('site_url: /');
+    expect(config).toContain('label: 🏠 Inicio');
+    expect(config).toContain('label: 📅 Eventos');
+    expect(config).toContain('label: 🗞️ Noticias');
+    expect(config).toContain('label: 👥 Nosotros — Equipo');
+    expect(config).toContain('label: 🤝 Alianzas');
+  });
+
+  it('permite añadir, ordenar, ocultar y eliminar secciones del inicio', () => {
+    const config = read('public/admin/config.yml');
+
+    expect(config).toContain('label: Secciones de Inicio');
+    expect(config).toContain('name: sections');
+    expect(config).toContain('name: sectionType');
+    expect(config).toContain('name: enabled');
+    expect(config).not.toContain('value: profile');
+    expect(config).not.toContain("value: '/perfil'");
+  });
+
+  it('permite añadir imágenes accesibles a eventos, noticias y equipo', () => {
+    const config = read('public/admin/config.yml');
+
+    expect(config.match(/name: imageSrc/g)).toHaveLength(3);
+    expect(config.match(/name: imageAlt/g)).toHaveLength(2);
+    expect(config).toContain('Fotografía del integrante');
+    expect(config).toContain('Imagen principal del evento');
+    expect(config).toContain('Imagen principal de la noticia');
+  });
+
+  it('permite administrar el enlace institucional de LEAD Perú', () => {
+    const config = read('public/admin/config.yml');
+
+    expect(config).toContain('label: Enlace de LEAD Perú');
+    expect(config).toContain('name: leadPeruUrl');
+  });
 
   it('configura Eventos como colección de archivos con slug automático', () => {
     const config = read('public/admin/config.yml');

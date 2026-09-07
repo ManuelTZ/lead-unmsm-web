@@ -17,7 +17,6 @@ LEAD UNMSM necesita una presencia web que permita informar, captar postulantes, 
 - Eventos próximos con CTA de inscripción.
 - Página de noticias.
 - Sección institucional y de impacto.
-- Test de perfil ejecutado en cliente.
 - Countdown configurable de convocatoria.
 - Contacto/alianzas mediante enlace externo.
 - Arquitectura preparada para CMS.

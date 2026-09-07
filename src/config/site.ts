@@ -26,6 +26,7 @@ export const siteConfig = {
     content.contactFormUrl,
     import.meta.env.PUBLIC_CONTACT_FORM_URL,
   ),
+  leadPeruUrl: normalizePublicUrl(content.leadPeruUrl),
   applicationDeadline: applicationOpen
     ? content.application.deadline || import.meta.env.PUBLIC_APPLICATION_DEADLINE || ''
     : '',

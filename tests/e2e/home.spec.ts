@@ -1,9 +1,39 @@
 import { expect, test } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+
+const configuredHomeSections = (
+  JSON.parse(readFileSync('src/content/home.json', 'utf8')) as {
+    sections: Array<{ sectionType: string; enabled: boolean }>;
+  }
+).sections.filter((section) => section.enabled);
 
 test('home muestra navegación y CTA principal', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Liderazgo STEM');
   await expect(page.getByRole('link', { name: 'Explorar eventos' })).toBeVisible();
+});
+
+test('home muestra la animación decorativa configurada desde el CMS', async ({ page }) => {
+  await page.goto('/');
+
+  const animation = page.locator('[data-lead-animation]');
+  await expect(animation).toBeVisible();
+  await expect(animation).toHaveAttribute('aria-hidden', 'true');
+  await expect(animation.locator('[data-lead-glow]')).toHaveCount(1);
+  await expect(animation.locator('[data-lead-spiral]')).toHaveCount(1);
+  await expect(animation.locator('svg')).toHaveCount(1);
+});
+
+test('home respeta el orden de las secciones activadas desde el CMS', async ({ page }) => {
+  await page.goto('/');
+
+  expect(configuredHomeSections.map((section) => section.sectionType)).not.toContain('profile');
+  const sections = page.locator('[data-home-section]');
+  await expect(sections).toHaveCount(configuredHomeSections.length);
+
+  for (const [index, section] of configuredHomeSections.entries()) {
+    await expect(sections.nth(index)).toHaveAttribute('data-home-section', section.sectionType);
+  }
 });
 
 test('home publica metadatos sociales coherentes', async ({ page }) => {
@@ -52,6 +82,23 @@ test('el encabezado muestra el logo oficial', async ({ page }) => {
     .toBeGreaterThan(0);
 });
 
+test('el encabezado enlaza al sitio institucional de LEAD Perú', async ({ page }) => {
+  await page.goto('/');
+
+  const menu = page.getByText('Menú', { exact: true });
+  if (await menu.isVisible()) {
+    await menu.click();
+  }
+
+  const leadPeruLink = page.getByRole('link', { name: 'LEAD Perú', exact: true }).filter({
+    visible: true,
+  });
+  await expect(leadPeruLink).toHaveAttribute('href', 'https://www.leadmindset.org/');
+  await expect(leadPeruLink).toHaveAttribute('target', '_blank');
+  await expect(leadPeruLink).toHaveAttribute('rel', 'noreferrer');
+  await expect(page.getByRole('link', { name: 'Tu perfil', exact: true })).toHaveCount(0);
+});
+
 test('permite saltar la navegación principal con teclado', async ({ page }) => {
   await page.goto('/');
 
@@ -95,7 +142,6 @@ test('la navegación principal recorre todas las rutas institucionales', async (
     { href: '/noticias', heading: 'Noticias' },
     { href: '/nosotros', heading: 'LEAD UNMSM' },
     { href: '/alianzas', heading: 'Una propuesta de alianza' },
-    { href: '/perfil', heading: 'Descubre tu perfil LEAD' },
   ];
 
   for (const route of routes) {
@@ -114,6 +160,13 @@ test('la navegación principal recorre todas las rutas institucionales', async (
     await expect(currentLinks.nth(0)).toHaveAttribute('href', route.href);
     await expect(currentLinks.nth(1)).toHaveAttribute('href', route.href);
   }
+});
+
+test('la experiencia pública ya no expone la ruta Tu perfil', async ({ page }) => {
+  const response = await page.goto('/perfil');
+
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Esta ruta no existe');
 });
 
 test('home comunica que la convocatoria no está abierta', async ({ page }) => {

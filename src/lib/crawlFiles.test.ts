@@ -16,7 +16,6 @@ describe('buildPublicPaths', () => {
       '/nosotros/',
       '/noticias/',
       '/noticias/radar-stem/',
-      '/perfil/',
     ]);
   });
 });

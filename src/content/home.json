@@ -9,5 +9,41 @@
   "secondaryAction": {
     "label": "Conocer LEAD UNMSM",
     "href": "/nosotros"
-  }
+  },
+  "heroAppearance": {
+    "backgroundType": "none",
+    "backgroundImage": "",
+    "backgroundVideo": "",
+    "animationEnabled": true
+  },
+  "sections": [
+    {
+      "sectionType": "events",
+      "enabled": true,
+      "eyebrow": "Agenda",
+      "title": "Eventos y oportunidades",
+      "introduction": "Encuentra las próximas actividades y revisa los detalles antes de inscribirte."
+    },
+    {
+      "sectionType": "news",
+      "enabled": true,
+      "eyebrow": "Actualidad",
+      "title": "Noticias de la comunidad",
+      "introduction": "Conoce las iniciativas, aprendizajes y apariciones públicas de LEAD UNMSM."
+    },
+    {
+      "sectionType": "team",
+      "enabled": false,
+      "eyebrow": "Personas",
+      "title": "Nuestro equipo",
+      "introduction": "Conoce a quienes impulsan las áreas y proyectos del chapter."
+    },
+    {
+      "sectionType": "alliances",
+      "enabled": true,
+      "eyebrow": "Colaboraciones",
+      "title": "Construyamos oportunidades juntos",
+      "introduction": "Explora cómo una organización puede colaborar con el talento y las iniciativas de LEAD UNMSM."
+    }
+  ]
 }

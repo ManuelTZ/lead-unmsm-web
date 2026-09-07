@@ -13,7 +13,7 @@ interface RobotsInput {
   allowIndexing: boolean;
 }
 
-const staticPaths = ['/', '/alianzas/', '/eventos/', '/nosotros/', '/noticias/', '/perfil/'];
+const staticPaths = ['/', '/alianzas/', '/eventos/', '/nosotros/', '/noticias/'];
 
 function escapeXml(value: string): string {
   return value

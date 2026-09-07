@@ -1,0 +1,133 @@
+---
+import { matchesPopupPath, popups } from '@/data/popups';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const popup = popups.find((item) => item.enabled && matchesPopupPath(item.path, currentPath));
+const actionIsExternal = popup?.actionUrl?.startsWith('https://') ?? false;
+---
+
+{
+  popup && (
+    <dialog
+      class="popup"
+      aria-labelledby={`${popup.id}-title`}
+      aria-describedby={`${popup.id}-message`}
+      data-popup
+      data-popup-key={popup.id}
+      data-popup-delay={popup.delaySeconds}
+    >
+      <button class="popup-close" type="button" aria-label="Cerrar aviso" data-popup-close>
+        <span aria-hidden="true">×</span>
+      </button>
+      <p class="eyebrow">Aviso</p>
+      <h2 id={`${popup.id}-title`}>{popup.title}</h2>
+      <p id={`${popup.id}-message`}>{popup.message}</p>
+      {popup.actionLabel && popup.actionUrl && (
+        <a
+          class="button button-primary"
+          href={popup.actionUrl}
+          target={actionIsExternal ? '_blank' : undefined}
+          rel={actionIsExternal ? 'noreferrer' : undefined}
+          data-popup-action
+        >
+          {popup.actionLabel}
+        </a>
+      )}
+    </dialog>
+  )
+}
+
+<script>
+  const popup = document.querySelector<HTMLDialogElement>('[data-popup]');
+
+  if (popup) {
+    const key = `lead-popup:${popup.dataset.popupKey ?? 'notice'}`;
+    const delay = Number(popup.dataset.popupDelay ?? 0) * 1000;
+    const wasDismissed = (() => {
+      try {
+        return window.sessionStorage.getItem(key) === 'dismissed';
+      } catch {
+        return false;
+      }
+    })();
+    const markDismissed = () => {
+      try {
+        window.sessionStorage.setItem(key, 'dismissed');
+      } catch {}
+    };
+
+    popup.querySelector('[data-popup-close]')?.addEventListener('click', () => popup.close());
+    popup.querySelector('[data-popup-action]')?.addEventListener('click', markDismissed);
+    popup.addEventListener('close', markDismissed);
+
+    if (!wasDismissed) {
+      window.setTimeout(() => popup.showModal(), delay);
+    }
+  }
+</script>
+
+<style>
+  .popup {
+    width: min(calc(100% - 32px), 560px);
+    border: 1px solid #6f2844;
+    border-radius: 18px;
+    padding: clamp(26px, 5vw, 42px);
+    background:
+      radial-gradient(circle at 100% 0%, rgba(232, 62, 120, 0.2), transparent 42%), var(--ink-900);
+    color: var(--white);
+    box-shadow: 0 24px 90px rgba(0, 0, 0, 0.62);
+  }
+
+  .popup::backdrop {
+    background: rgba(4, 4, 7, 0.78);
+    backdrop-filter: blur(5px);
+  }
+
+  .popup-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 1px solid var(--ink-700);
+    border-radius: 50%;
+    background: var(--ink-950);
+    color: var(--white);
+    cursor: pointer;
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .popup h2 {
+    max-width: 440px;
+    margin: 0;
+    padding-right: 34px;
+    font-size: clamp(1.8rem, 5vw, 2.7rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .popup p:not(.eyebrow) {
+    margin: 20px 0 24px;
+    color: #d0d0d6;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .popup[open] {
+      animation: popup-enter 180ms ease-out;
+    }
+  }
+
+  @keyframes popup-enter {
+    from {
+      transform: translateY(12px) scale(0.98);
+      opacity: 0;
+    }
+  }
+</style>

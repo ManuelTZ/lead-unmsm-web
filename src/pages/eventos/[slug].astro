@@ -21,6 +21,18 @@ const registrationUrl = resolveEventRegistrationUrl(event);
       <p class="eyebrow">{event.mode} · {formatDate(event.date)}</p>
       <h1 class="section-title">{event.title}</h1>
       <p class="lead">{event.excerpt}</p>
+      {
+        event.imageSrc && event.imageAlt && (
+          <img
+            class="event-cover"
+            src={event.imageSrc}
+            alt={event.imageAlt}
+            width="1200"
+            height="675"
+            decoding="async"
+          />
+        )
+      }
       <div class="card info">
         <div><span>Lugar</span><strong>{event.location}</strong></div><div>
           <span>Estado</span><strong
@@ -50,6 +62,16 @@ const registrationUrl = resolveEventRegistrationUrl(event);
   .lead {
     font-size: 1.2rem;
     color: #d0d0d6;
+  }
+  .event-cover {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 30px 0;
+    border: 1px solid var(--ink-700);
+    border-radius: var(--radius);
+    object-fit: cover;
+    background: var(--ink-800);
   }
   .info {
     display: grid;

@@ -9,6 +9,8 @@ const events = readdirSync(eventsDirectory)
     ...(JSON.parse(readFileSync(join(eventsDirectory, file), 'utf8')) as {
       title: string;
       excerpt: string;
+      imageSrc?: string;
+      imageAlt?: string;
     }),
     slug: basename(file, '.json'),
   }));
@@ -34,6 +36,12 @@ test('eventos representa la agenda configurada sin depender de que esté vacía'
     await expect(page).toHaveURL(`/eventos/${event.slug}`);
     await expect(page.getByRole('heading', { level: 1, name: event.title })).toBeVisible();
     await expect(page.getByText(event.excerpt, { exact: true })).toBeVisible();
+    if (event.imageSrc && event.imageAlt) {
+      await expect(page.getByRole('img', { name: event.imageAlt })).toHaveAttribute(
+        'src',
+        event.imageSrc,
+      );
+    }
     await page.goBack();
   }
 });

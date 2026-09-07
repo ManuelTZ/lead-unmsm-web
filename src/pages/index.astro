@@ -1,12 +1,46 @@
 ---
 import Countdown from '@/components/Countdown.astro';
+import HomeContentSections from '@/components/HomeContentSections.astro';
+import LeadHeroAnimation from '@/components/LeadHeroAnimation.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { homeContent } from '@/data/home';
 import { siteConfig } from '@/config/site';
+import { contentRepository } from '@/services/content/repository';
+
+const { heroAppearance } = homeContent;
+const hasImageBackground = heroAppearance.backgroundType === 'image';
+const hasVideoBackground = heroAppearance.backgroundType === 'video';
+const [events, news, members] = await Promise.all([
+  contentRepository.listEvents(),
+  contentRepository.listNews(),
+  contentRepository.listMembers(),
+]);
 ---
 
-<BaseLayout title="Inicio" description={siteConfig.description}>
-  <section class="hero">
+<BaseLayout title="Inicio" description={siteConfig.description} showContact>
+  <section class:list={['hero', { 'hero-has-media': hasImageBackground || hasVideoBackground }]}>
+    {
+      (hasImageBackground || hasVideoBackground) && (
+        <div class="hero-background" data-hero-background={heroAppearance.backgroundType}>
+          {hasImageBackground && (
+            <img src={heroAppearance.backgroundImage} alt="" fetchpriority="high" />
+          )}
+          {hasVideoBackground && (
+            <video
+              src={heroAppearance.backgroundVideo}
+              poster={heroAppearance.backgroundImage || undefined}
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              data-hero-video
+            />
+          )}
+          <div class="hero-overlay" aria-hidden="true" />
+        </div>
+      )
+    }
+    {heroAppearance.animationEnabled && <LeadHeroAnimation />}
     <div class="container hero-content">
       <p class="eyebrow">{homeContent.eyebrow}</p>
       <h1>{homeContent.title}</h1>
@@ -22,6 +56,7 @@ import { siteConfig } from '@/config/site';
       <Countdown deadline={siteConfig.applicationDeadline} isOpen={siteConfig.applicationOpen} />
     </div>
   </section>
+  <HomeContentSections sections={homeContent.sections} {events} {news} {members} />
 </BaseLayout>
 
 <script is:inline>
@@ -35,18 +70,61 @@ import { siteConfig } from '@/config/site';
     });
     document.head.append(identityScript);
   }
+
+  const heroVideo = document.querySelector('[data-hero-video]');
+  if (
+    heroVideo instanceof HTMLVideoElement &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) {
+    void heroVideo.play();
+  }
 </script>
 
 <style>
   .hero {
+    position: relative;
     display: grid;
     min-height: min(680px, calc(100svh - 150px));
     align-items: center;
+    isolation: isolate;
+    overflow: hidden;
     padding: 80px 0;
   }
 
   .hero-content {
+    position: relative;
+    z-index: 2;
     max-width: 900px;
+  }
+
+  .hero-background,
+  .hero-background img,
+  .hero-background video,
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-background {
+    z-index: 0;
+  }
+
+  .hero-background img,
+  .hero-background video {
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(8, 8, 11, 0.96) 0%,
+        rgba(8, 8, 11, 0.78) 58%,
+        rgba(8, 8, 11, 0.58) 100%
+      ),
+      linear-gradient(0deg, rgba(8, 8, 11, 0.65), transparent 45%);
   }
 
   h1 {
@@ -80,6 +158,10 @@ import { siteConfig } from '@/config/site';
     .hero-actions {
       align-items: stretch;
       flex-direction: column;
+    }
+
+    .hero-overlay {
+      background: rgba(8, 8, 11, 0.78);
     }
   }
 </style>

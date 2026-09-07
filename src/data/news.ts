@@ -1,4 +1,5 @@
 import type { NewsArticle } from '@/models/content';
+import { isLocalMediaPath } from '@/lib/media';
 
 const isNonEmptyString = (value: unknown): value is string =>
   typeof value === 'string' && value.trim().length > 0;
@@ -7,6 +8,11 @@ const isIsoDate = (value: unknown): value is string =>
   isNonEmptyString(value) &&
   /^\d{4}-\d{2}-\d{2}$/.test(value) &&
   !Number.isNaN(Date.parse(`${value}T12:00:00Z`));
+
+const hasValidOptionalImage = (article: Record<string, unknown>): boolean =>
+  article.imageSrc === undefined && article.imageAlt === undefined
+    ? true
+    : isLocalMediaPath(article.imageSrc) && isNonEmptyString(article.imageAlt);
 
 const isNewsArticle = (value: unknown): value is NewsArticle => {
   if (!value || typeof value !== 'object') return false;
@@ -23,6 +29,7 @@ const isNewsArticle = (value: unknown): value is NewsArticle => {
     Array.isArray(article.body) &&
     article.body.length > 0 &&
     article.body.every(isNonEmptyString) &&
+    hasValidOptionalImage(article) &&
     (article.isDemo === undefined || typeof article.isDemo === 'boolean')
   );
 };

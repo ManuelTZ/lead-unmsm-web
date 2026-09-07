@@ -18,6 +18,18 @@ const { article } = Astro.props;
       <h1 class="section-title">{article.title}</h1>
       <p class="meta">{formatDate(article.publishedAt)} · {article.author}</p>
       <p class="dek">{article.excerpt}</p>
+      {
+        article.imageSrc && article.imageAlt && (
+          <img
+            class="article-cover"
+            src={article.imageSrc}
+            alt={article.imageAlt}
+            width="1200"
+            height="675"
+            decoding="async"
+          />
+        )
+      }
       <div class="body">{article.body.map((paragraph) => <p>{paragraph}</p>)}</div>
       {
         article.isDemo && (
@@ -46,6 +58,16 @@ const { article } = Astro.props;
   .dek {
     font-size: 1.25rem;
     color: #d5d5da;
+  }
+  .article-cover {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 30px 0;
+    border: 1px solid var(--ink-700);
+    border-radius: var(--radius);
+    object-fit: cover;
+    background: var(--ink-800);
   }
   .body {
     font-size: 1.06rem;

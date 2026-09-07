@@ -70,6 +70,8 @@ Pruebas unitarias:
 
 ## Fase 4 — Test “Descubre tu perfil LEAD”
 
+**Estado:** retirado del producto por ADR-027.
+
 **Objetivo:** orientar al estudiante y llevarlo a una acción.
 
 Entregables:

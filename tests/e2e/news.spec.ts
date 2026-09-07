@@ -9,6 +9,8 @@ const articles = readdirSync(newsDirectory)
     ...(JSON.parse(readFileSync(join(newsDirectory, file), 'utf8')) as {
       title: string;
       excerpt: string;
+      imageSrc?: string;
+      imageAlt?: string;
     }),
     slug: basename(file, '.json'),
   }));
@@ -31,6 +33,12 @@ test('noticias representa la colección y permite abrir cada publicación', asyn
     await expect(page).toHaveURL(`/noticias/${article.slug}`);
     await expect(page.getByRole('heading', { level: 1, name: article.title })).toBeVisible();
     await expect(page.getByText(article.excerpt, { exact: true })).toBeVisible();
+    if (article.imageSrc && article.imageAlt) {
+      await expect(page.getByRole('img', { name: article.imageAlt })).toHaveAttribute(
+        'src',
+        article.imageSrc,
+      );
+    }
     await page.goBack();
   }
 });

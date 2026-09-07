@@ -14,7 +14,7 @@ Equipo editorial
 ContentRepository ───────► Astro ───────► archivos estáticos ───────► CDN
       ▲                       │
       │                       ├── countdown (cliente)
-Datos locales (MVP)           └── test de perfil (cliente)
+Datos locales (MVP)           └── popups editoriales (cliente)
 ```
 
 ## Por qué separar `ContentRepository`

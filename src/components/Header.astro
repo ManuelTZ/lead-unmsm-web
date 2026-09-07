@@ -7,7 +7,6 @@ const links = [
   ['/noticias', 'Noticias'],
   ['/nosotros', 'Nosotros'],
   ['/alianzas', 'Alianzas'],
-  ['/perfil', 'Tu perfil'],
 ] as const;
 
 const pathname = Astro.url.pathname;
@@ -37,6 +36,16 @@ const isCurrent = (href: (typeof links)[number][0]) =>
           </a>
         ))
       }
+      {
+        siteConfig.leadPeruUrl && (
+          <a class="lead-peru-link" href={siteConfig.leadPeruUrl} target="_blank" rel="noreferrer">
+            <>
+              <span>LEAD Perú</span>
+              <span aria-hidden="true">↗</span>
+            </>
+          </a>
+        )
+      }
     </nav>
 
     <details class="mobile-nav" data-mobile-nav>
@@ -50,6 +59,21 @@ const isCurrent = (href: (typeof links)[number][0]) =>
               {label}
             </a>
           ))
+        }
+        {
+          siteConfig.leadPeruUrl && (
+            <a
+              class="lead-peru-link"
+              href={siteConfig.leadPeruUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <>
+                <span>LEAD Perú</span>
+                <span aria-hidden="true">↗</span>
+              </>
+            </a>
+          )
         }
       </nav>
     </details>
@@ -136,6 +160,25 @@ const isCurrent = (href: (typeof links)[number][0]) =>
   .nav-link.active {
     box-shadow: inset 0 -2px var(--rose-500);
   }
+  .lead-peru-link {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-left: 6px;
+    border: 1px solid var(--rose-500);
+    border-radius: 8px;
+    padding: 8px 11px;
+    color: var(--rose-200);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 850;
+  }
+  .lead-peru-link:hover {
+    background: var(--rose-500);
+    color: #19050d;
+  }
   .mobile-nav {
     display: none;
     position: relative;
@@ -168,6 +211,9 @@ const isCurrent = (href: (typeof links)[number][0]) =>
   .mobile-nav a:hover,
   .mobile-nav a[aria-current='page'] {
     background: var(--ink-800);
+  }
+  .mobile-nav .lead-peru-link {
+    margin: 8px 0 0;
   }
   @media (max-width: 900px) {
     .desktop-nav {

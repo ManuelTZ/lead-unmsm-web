@@ -2,9 +2,9 @@
 
 ## Pirámide
 
-1. **Unitarias (Vitest):** lógica pura como countdown, scoring, validación de slugs/datos.
+1. **Unitarias (Vitest):** lógica pura como countdown y validación de slugs/datos.
 2. **Integración ligera:** repositorio de contenido y configuración.
-3. **E2E (Playwright):** rutas, CTA, navegación móvil y test de perfil.
+3. **E2E (Playwright):** rutas, CTA, navegación móvil y formularios.
 4. **Revisión UX/UI manual:** teclado, responsive, contenido real y contraste.
 
 ## Regla por update
@@ -25,7 +25,7 @@ npm run verify
 - navegación funciona con teclado.
 - formulario de inscripción no muestra un enlace inválido.
 - countdown no muestra NaN.
-- test de perfil no calcula sin todas las respuestas.
+- el formulario de contacto solo aparece en Inicio.
 - rutas de detalle existen para eventos/noticias.
 - cambios visuales no eliminan contenido ni CTAs.
 

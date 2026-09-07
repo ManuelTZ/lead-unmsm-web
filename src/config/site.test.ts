@@ -9,6 +9,10 @@ describe('configuración editorial del sitio', () => {
     });
   });
 
+  it('publica el enlace institucional de LEAD Perú', () => {
+    expect(siteConfig.leadPeruUrl).toBe('https://www.leadmindset.org/');
+  });
+
   it('mantiene cerrada la convocatoria mientras no exista una oficial', () => {
     expect(siteConfig.applicationOpen).toBe(false);
     expect(siteConfig.applicationFormUrl).toBe('');

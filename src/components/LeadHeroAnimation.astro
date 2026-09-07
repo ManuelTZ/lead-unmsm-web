@@ -1,143 +1,119 @@
 <div class="lead-animation" data-lead-animation aria-hidden="true">
-  <span class="moving-glow" data-lead-glow></span>
-  <svg viewBox="0 0 620 520" focusable="false">
-    <path
-      class="spiral"
-      data-lead-spiral
-      pathLength="1"
-      d="M112 92 C110 250 92 420 252 424 C430 428 566 358 546 226 C530 116 416 74 312 116 C220 153 198 246 254 304 C305 358 400 342 428 274 C452 216 406 164 350 174 C302 182 282 232 306 266 C326 294 370 292 387 263"
-    ></path>
-  </svg>
+  <span class="breathing-light" data-lead-glow></span>
 </div>
 
 <style>
   .lead-animation {
     position: absolute;
     z-index: 1;
-    top: 7%;
-    right: max(-54px, calc((100vw - var(--max)) / 2 - 54px));
-    width: min(52vw, 650px);
-    height: 86%;
+    inset: 0;
+    overflow: hidden;
     pointer-events: none;
   }
 
-  svg {
+  .breathing-light {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-  }
-
-  .moving-glow {
-    position: absolute;
-    z-index: 2;
-    top: 8%;
-    left: 10%;
-    width: clamp(190px, 24vw, 310px);
+    top: 4%;
+    right: -4%;
+    width: clamp(430px, 56vw, 760px);
     aspect-ratio: 1;
     border-radius: 50%;
     background: radial-gradient(
       circle,
-      rgba(255, 116, 169, 0.82),
-      rgba(236, 45, 116, 0.28) 34%,
-      transparent 72%
+      rgba(255, 209, 225, 0.56) 0%,
+      rgba(244, 63, 126, 0.44) 22%,
+      rgba(190, 24, 93, 0.16) 50%,
+      transparent 76%
     );
-    filter: blur(26px);
+    filter: blur(58px);
     mix-blend-mode: screen;
     opacity: 0;
-    animation: light-to-spiral 9s ease-in-out infinite;
+    will-change: transform, opacity;
+    animation: background-breath 24s ease-in-out infinite;
   }
 
-  .spiral {
-    fill: none;
-    stroke: rgba(248, 104, 158, 0.92);
-    stroke-width: 7;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    filter: blur(3px) drop-shadow(0 0 18px rgba(244, 63, 126, 0.9))
-      drop-shadow(0 0 46px rgba(190, 24, 93, 0.62));
-    opacity: 0;
-    animation: spiral-trace 9s ease-in-out infinite;
-  }
-
-  @keyframes light-to-spiral {
-    0% {
-      opacity: 0;
-      transform: translate(0, 0) scale(0.7);
-    }
-
-    10%,
-    22% {
-      opacity: 0.9;
-      transform: translate(0, 8%) scale(1);
-    }
-
-    36% {
-      opacity: 0.78;
-      transform: translate(12%, 112%) scale(0.72);
-    }
-
-    44% {
-      opacity: 0;
-      transform: translate(28%, 178%) scale(0.18);
-    }
-
-    100% {
-      opacity: 0;
-      transform: translate(28%, 178%) scale(0.18);
-    }
-  }
-
-  @keyframes spiral-trace {
+  @keyframes background-breath {
     0%,
-    36% {
-      stroke-dashoffset: 1;
-      opacity: 0;
-    }
-
-    44% {
-      opacity: 0.88;
-    }
-
-    76% {
-      stroke-dashoffset: 0;
-      opacity: 0.82;
-    }
-
-    90%,
     100% {
-      stroke-dashoffset: 0;
       opacity: 0;
+      transform: translate(8%, -8%) scale(0.82);
+    }
+
+    8% {
+      opacity: 0.58;
+      transform: translate(8%, -8%) scale(0.96);
+    }
+
+    18% {
+      opacity: 0.72;
+      transform: translate(6%, -6%) scale(1.06);
+    }
+
+    27% {
+      opacity: 0;
+      transform: translate(5%, -5%) scale(0.92);
+    }
+
+    32% {
+      opacity: 0;
+      transform: translate(18%, 40%) scale(0.84);
+    }
+
+    39% {
+      opacity: 0.54;
+      transform: translate(18%, 40%) scale(0.96);
+    }
+
+    49% {
+      opacity: 0.68;
+      transform: translate(16%, 42%) scale(1.08);
+    }
+
+    58% {
+      opacity: 0;
+      transform: translate(15%, 43%) scale(0.92);
+    }
+
+    63% {
+      opacity: 0;
+      transform: translate(-22%, 18%) scale(0.84);
+    }
+
+    70% {
+      opacity: 0.56;
+      transform: translate(-22%, 18%) scale(0.96);
+    }
+
+    80% {
+      opacity: 0.7;
+      transform: translate(-20%, 20%) scale(1.06);
+    }
+
+    89% {
+      opacity: 0;
+      transform: translate(-19%, 21%) scale(0.92);
+    }
+
+    94% {
+      opacity: 0;
+      transform: translate(8%, -8%) scale(0.82);
     }
   }
 
   @media (max-width: 860px) {
-    .lead-animation {
-      top: 12%;
-      right: -120px;
-      width: min(88vw, 470px);
-      height: 72%;
-      opacity: 0.62;
+    .breathing-light {
+      top: 9%;
+      right: -42%;
+      width: min(124vw, 620px);
+      filter: blur(46px);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .moving-glow,
-    .spiral {
+    .breathing-light {
       animation: none;
-    }
-
-    .moving-glow {
       opacity: 0.28;
-      transform: translate(10%, 80%) scale(0.84);
-    }
-
-    .spiral {
-      stroke-dashoffset: 0;
-      opacity: 0.28;
+      transform: translate(-12%, 16%) scale(1);
     }
   }
 </style>

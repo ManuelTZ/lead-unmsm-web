@@ -53,7 +53,7 @@ describe('configuración del CMS', () => {
     expect(config).toContain('name: backgroundImage');
     expect(config).toContain('name: backgroundVideo');
     expect(config).toContain('name: animationEnabled');
-    expect(config).toContain('label: Mostrar luz y espiral difuminadas');
+    expect(config).toContain('label: Mostrar respiración luminosa del fondo');
   });
 
   it('presenta el panel con marca, iconos y nombres alineados con la web', () => {

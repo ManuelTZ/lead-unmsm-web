@@ -81,7 +81,7 @@ collections:
                 widget: file
                 required: false
                 hint: Usa un archivo MP4 corto y optimizado para móviles.
-              - label: Mostrar luz y espiral difuminadas
+              - label: Mostrar respiración luminosa del fondo
                 name: animationEnabled
                 widget: boolean
                 default: true

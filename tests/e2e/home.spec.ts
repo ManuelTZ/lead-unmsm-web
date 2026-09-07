@@ -19,9 +19,12 @@ test('home muestra la animación decorativa configurada desde el CMS', async ({ 
   const animation = page.locator('[data-lead-animation]');
   await expect(animation).toBeVisible();
   await expect(animation).toHaveAttribute('aria-hidden', 'true');
-  await expect(animation.locator('[data-lead-glow]')).toHaveCount(1);
-  await expect(animation.locator('[data-lead-spiral]')).toHaveCount(1);
-  await expect(animation.locator('svg')).toHaveCount(1);
+  const glow = animation.locator('[data-lead-glow]');
+  await expect(glow).toHaveCount(1);
+  await expect(glow).toHaveCSS('animation-name', 'background-breath');
+  await expect(glow).toHaveCSS('animation-duration', '24s');
+  await expect(animation.locator('[data-lead-spiral]')).toHaveCount(0);
+  await expect(animation.locator('svg')).toHaveCount(0);
 });
 
 test('home respeta el orden de las secciones activadas desde el CMS', async ({ page }) => {

@@ -128,7 +128,7 @@ Noticias usa el mismo widget datetime sin hora que Eventos y persiste publishedA
 
 **Estado:** aceptado.
 
-La portada permite elegir desde Decap entre ningún fondo, una imagen o un video local subido a `public/uploads`. El video usa una imagen de portada opcional, carga solo metadatos y no se reproduce cuando el usuario prefiere movimiento reducido. La animación decorativa usa una luz difuminada grande que aparece, se desplaza y da paso al trazado luminoso de una espiral; también es administrable, no expone contenido semántico y respeta `prefers-reduced-motion`.
+La portada permite elegir desde Decap entre ningún fondo, una imagen o un video local subido a `public/uploads`. El video usa una imagen de portada opcional, carga solo metadatos y no se reproduce cuando el usuario prefiere movimiento reducido. La animación decorativa usa una única esfera difuminada de gran tamaño que aparece y desaparece en tres zonas durante un ciclo de veinticuatro segundos. Cada cambio amplio de posición sucede cuando la luz está apagada y, mientras está visible, solo conserva una deriva mínima para producir una respiración lenta del fondo sin recorridos perceptibles ni saltos. También es administrable, no expone contenido semántico y respeta `prefers-reduced-motion`.
 
 ## ADR-022 — Imágenes editoriales locales con texto alternativo
 

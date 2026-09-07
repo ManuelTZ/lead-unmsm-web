@@ -9,6 +9,18 @@
       "actionLabel": "Ir a contacto",
       "actionUrl": "/#contacto",
       "delaySeconds": 1
+    },
+    {
+      "enabled": true,
+      "path": "/",
+      "message": "PRUEBA",
+      "imageSrc": "/uploads/mv5bmgi2ndrmztgtyzu2ns00m2y1ltkwmwutntkxnwfinjfkymq2xkeyxkfqcgc-._v1_.jpg",
+      "imageAlt": "PRUEBA",
+      "title": "PRUEBA",
+      "actionUrl": "PRUEBA",
+      "id": "Pop-up1",
+      "delaySeconds": 0,
+      "actionLabel": "PRUEBA"
     }
   ]
 }

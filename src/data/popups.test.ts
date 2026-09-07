@@ -17,6 +17,16 @@ describe('popups administrables', () => {
     expect(parsePopups({ items: [validPopup] })).toEqual([validPopup]);
   });
 
+  it('acepta una imagen local cuando incluye descripción accesible', () => {
+    const popupWithImage = {
+      ...validPopup,
+      imageSrc: '/uploads/convocatoria.webp',
+      imageAlt: 'Estudiantes participando en una actividad LEAD.',
+    };
+
+    expect(parsePopups({ items: [popupWithImage] })).toEqual([popupWithImage]);
+  });
+
   it('descarta identificadores, rutas o acciones inseguras', () => {
     expect(
       parsePopups({
@@ -24,6 +34,8 @@ describe('popups administrables', () => {
           { ...validPopup, id: 'Con espacios' },
           { ...validPopup, path: '/ruta-inventada' },
           { ...validPopup, actionUrl: 'javascript:alert(1)' },
+          { ...validPopup, imageSrc: '/uploads/aviso.webp' },
+          { ...validPopup, imageSrc: 'https://example.com/aviso.webp', imageAlt: 'Aviso' },
         ],
       }),
     ).toEqual([]);

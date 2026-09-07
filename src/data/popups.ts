@@ -1,4 +1,5 @@
 import content from '@/content/popups.json';
+import { normalizeLocalMediaPath } from '@/lib/media';
 import { normalizePublicUrl } from '@/lib/publicUrl';
 
 const allowedPaths = new Set(['*', '/', '/eventos', '/noticias', '/nosotros', '/alianzas']);
@@ -27,6 +28,8 @@ export interface PopupNotice {
   path: string;
   title: string;
   message: string;
+  imageSrc?: string;
+  imageAlt?: string;
   actionLabel?: string;
   actionUrl?: string;
   delaySeconds: number;
@@ -38,6 +41,9 @@ const isPopupNotice = (value: unknown): value is PopupNotice => {
   const popup = value as Record<string, unknown>;
   const hasNoAction = !isNonEmptyString(popup.actionLabel) && !isNonEmptyString(popup.actionUrl);
   const hasValidAction = isNonEmptyString(popup.actionLabel) && isSafeActionUrl(popup.actionUrl);
+  const hasNoImage = !isNonEmptyString(popup.imageSrc) && !isNonEmptyString(popup.imageAlt);
+  const hasValidImage =
+    Boolean(normalizeLocalMediaPath(popup.imageSrc)) && isNonEmptyString(popup.imageAlt);
 
   return (
     isNonEmptyString(popup.id) &&
@@ -51,6 +57,7 @@ const isPopupNotice = (value: unknown): value is PopupNotice => {
     Number.isInteger(popup.delaySeconds) &&
     popup.delaySeconds >= 0 &&
     popup.delaySeconds <= 30 &&
+    (hasNoImage || hasValidImage) &&
     (hasNoAction || hasValidAction)
   );
 };

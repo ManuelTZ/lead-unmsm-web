@@ -9,7 +9,8 @@ La web está preparada para publicarse como sitio estático en Netlify y adminis
 - portada;
 - eventos y enlaces de inscripción;
 - noticias;
-- integrantes, métricas, alianzas y apariciones en prensa;
+- integrantes y alianzas;
+- popups con imagen opcional;
 - fotografías y otros archivos subidos a `public/uploads`.
 
 ## Activación inicial en Netlify
@@ -46,11 +47,11 @@ El formulario de Inicio se detecta automáticamente durante el deploy porque usa
 4. Configurar `leadunmsm@gmail.com` como destinatario y guardar.
 5. Enviar un mensaje de prueba desde el dominio publicado y confirmar recepción y carpeta de spam.
 
-El correo visible y los asuntos se editan desde **Contenido institucional → Contáctanos — solo Inicio**. Cambiar el correo visible no modifica por sí solo el destinatario de Netlify; ambas configuraciones deben mantenerse sincronizadas.
+Los asuntos se editan desde **Contenido institucional → Contáctanos — solo Inicio**. El destinatario no se muestra en la página y se mantiene exclusivamente en la configuración de notificaciones de Netlify.
 
 ## Organización del panel
 
-El panel usa los mismos nombres principales que la web y añade iconos para reconocer Inicio, Eventos, Noticias, Nosotros, Alianzas, Contacto y Popups. En **Inicio → Secciones de Inicio** cada bloque puede añadirse, reordenarse, ocultarse o eliminarse. Los tipos disponibles reutilizan los datos oficiales de Eventos, Noticias y Equipo, por lo que no duplican contenido.
+El panel usa los mismos nombres principales que la web y añade iconos para reconocer Inicio, Eventos, Noticias, Nosotros, Alianzas, Contacto y Popups. En **Inicio → Secciones de Inicio** cada bloque puede añadirse, reordenarse, ocultarse o eliminarse. Los tipos disponibles reutilizan los datos oficiales de Eventos, Noticias y Equipo, por lo que no duplican contenido. Métricas y Prensa no aparecen como opciones editoriales mientras no tengan una correspondencia confiable con la vista pública.
 
 ## Antes del lanzamiento indexable
 

@@ -4,7 +4,7 @@ test('solo el inicio muestra el formulario de contacto listo para Netlify', asyn
   await page.goto('/');
 
   await expect(page.getByRole('heading', { name: 'Contáctanos' })).toBeVisible();
-  await expect(page.getByText('leadunmsm@gmail.com', { exact: true })).toBeVisible();
+  await expect(page.getByText('leadunmsm@gmail.com', { exact: true })).toHaveCount(0);
 
   const form = page.locator('form[name="contacto-lead-unmsm"]');
   await expect(form).toHaveAttribute('method', 'POST');

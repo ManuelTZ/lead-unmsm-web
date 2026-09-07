@@ -152,7 +152,7 @@ Solo Inicio termina con un formulario estático detectado por Netlify Forms, con
 
 **Estado:** aceptado.
 
-Decap permite añadir, ordenar, activar y eliminar avisos con una página objetivo, demora y CTA opcional. Solo se muestra el primer aviso activo que coincide con la ruta; al cerrarlo queda descartado durante la sesión para evitar interrupciones repetidas. Los enlaces se restringen a rutas internas o HTTPS y el diálogo nativo conserva foco, teclado y cierre con Escape.
+Decap permite añadir, ordenar, activar y eliminar avisos con una página objetivo, demora, imagen y CTA opcionales. Las imágenes se restringen a archivos locales y exigen una descripción accesible. Solo se muestra el primer aviso activo que coincide con la ruta; al cerrarlo queda descartado durante la sesión para evitar interrupciones repetidas. Los enlaces se restringen a rutas internas o HTTPS y el diálogo nativo conserva foco, teclado y cierre con Escape.
 
 ## ADR-026 — Inicio compuesto por secciones tipadas y reordenables
 
@@ -165,3 +165,9 @@ Inicio incorpora una lista editorial de secciones permitidas: Eventos, Noticias,
 **Estado:** aceptado.
 
 La navegación, la portada, el CMS, el sitemap y la ruta pública dejan de exponer el test “Tu perfil”. También se eliminan su componente, datos, lógica y pruebas exclusivas para evitar mantener una funcionalidad fuera del alcance actual del producto.
+
+## ADR-028 — El panel solo expone controles editoriales confiables
+
+**Estado:** aceptado.
+
+Métricas y Prensa se retiran de Decap porque el equipo no observa una correspondencia confiable entre esas ediciones y la página Nosotros. Los datos locales permanecen desacoplados para no alterar la vista pública; podrán volver al panel cuando su flujo de edición tenga una prueba visible y estable. El formulario de contacto tampoco publica el correo destinatario: esa dirección vive únicamente en las notificaciones privadas de Netlify.

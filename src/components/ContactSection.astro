@@ -8,7 +8,6 @@ import { contactContent } from '@/data/contact';
       <p class="eyebrow">Conversemos</p>
       <h2 class="section-title" id="contact-title">{contactContent.title}</h2>
       <p>{contactContent.introduction}</p>
-      {contactContent.email && <strong>{contactContent.email}</strong>}
     </div>
 
     <form
@@ -95,10 +94,6 @@ import { contactContent } from '@/data/contact';
     margin: 24px 0 18px;
     color: #d0d0d6;
     font-size: 1.08rem;
-  }
-
-  .contact-copy strong {
-    color: var(--rose-300);
   }
 
   .contact-form {

@@ -111,7 +111,6 @@ collections:
         fields:
           - { label: Título, name: title, widget: string, required: true }
           - { label: Introducción, name: introduction, widget: text, required: true }
-          - { label: Correo visible, name: email, widget: string, required: true }
           - label: Asuntos disponibles
             name: subjects
             widget: list
@@ -151,6 +150,14 @@ collections:
                   - { label: Alianzas, value: '/alianzas' }
               - { label: Título, name: title, widget: string, required: true }
               - { label: Mensaje, name: message, widget: text, required: true }
+              - { label: Imagen del popup, name: imageSrc, widget: image, required: false }
+              - {
+                  label: Descripción accesible de la imagen del popup,
+                  name: imageAlt,
+                  widget: string,
+                  required: false,
+                  hint: Obligatoria cuando el popup tiene imagen.,
+                }
               - { label: Texto del botón, name: actionLabel, widget: string, required: false }
               - { label: Enlace del botón, name: actionUrl, widget: string, required: false }
               - {
@@ -181,20 +188,6 @@ collections:
               - { label: Fotografía del integrante, name: imageSrc, widget: image, required: false }
               - { label: LinkedIn, name: linkedinUrl, widget: string, required: false }
 
-      - name: metrics
-        label: 📊 Nosotros — Métricas
-        file: src/content/metrics.json
-        format: json
-        fields:
-          - label: Métricas
-            name: items
-            widget: list
-            required: false
-            summary: '{{fields.value}} {{fields.label}}'
-            fields:
-              - { label: Valor, name: value, widget: string }
-              - { label: Descripción, name: label, widget: string }
-
       - name: partners
         label: 🤝 Alianzas
         file: src/content/partners.json
@@ -208,23 +201,6 @@ collections:
             fields:
               - { label: Nombre, name: name, widget: string }
               - { label: Sitio web, name: url, widget: string, required: false }
-
-      - name: press
-        label: 📰 Nosotros — Prensa
-        file: src/content/press.json
-        format: json
-        fields:
-          - label: Apariciones en medios
-            name: items
-            widget: list
-            required: false
-            summary: '{{fields.outlet}} — {{fields.title}}'
-            fields:
-              - { label: Título, name: title, widget: string }
-              - { label: Medio, name: outlet, widget: string }
-              - { label: Fecha, name: publishedAt, widget: date, format: YYYY-MM-DD }
-              - { label: Enlace, name: url, widget: string }
-              - { label: Resumen, name: excerpt, widget: text, required: false }
 
   - name: events
     label: 📅 Eventos

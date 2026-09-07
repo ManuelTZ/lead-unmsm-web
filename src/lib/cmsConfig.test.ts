@@ -17,7 +17,7 @@ describe('configuración del CMS', () => {
     expect(config).toContain('publish_mode: editorial_workflow');
   });
 
-  it.each(['site', 'home', 'contact', 'popups', 'members', 'metrics', 'partners', 'press'])(
+  it.each(['site', 'home', 'contact', 'popups', 'members', 'partners'])(
     'expone la colección administrable %s',
     (collection) => {
       const config = read('public/admin/config.yml');
@@ -31,7 +31,7 @@ describe('configuración del CMS', () => {
 
     expect(config).toContain('label: ✉️ Contáctanos — solo Inicio');
     expect(config).toContain('name: introduction');
-    expect(config).toContain('name: email');
+    expect(config).not.toContain('label: Correo visible');
     expect(config).toContain('name: subjects');
   });
 
@@ -43,6 +43,17 @@ describe('configuración del CMS', () => {
     expect(config).toContain('label: Avisos');
     expect(config).toContain('name: items');
     expect(config).toContain('name: delaySeconds');
+    expect(config).toContain('label: Imagen del popup');
+    expect(config).toContain('label: Descripción accesible de la imagen del popup');
+  });
+
+  it('oculta Métricas y Prensa del panel hasta que tengan una edición confiable', () => {
+    const config = read('public/admin/config.yml');
+
+    expect(config).not.toContain('- name: metrics');
+    expect(config).not.toContain('- name: press');
+    expect(config).not.toContain('label: 📊 Nosotros — Métricas');
+    expect(config).not.toContain('label: 📰 Nosotros — Prensa');
   });
 
   it('permite administrar el fondo y la animación del hero', () => {
@@ -79,11 +90,11 @@ describe('configuración del CMS', () => {
     expect(config).not.toContain("value: '/perfil'");
   });
 
-  it('permite añadir imágenes accesibles a eventos, noticias y equipo', () => {
+  it('permite añadir imágenes accesibles a popups, eventos, noticias y equipo', () => {
     const config = read('public/admin/config.yml');
 
-    expect(config.match(/name: imageSrc/g)).toHaveLength(3);
-    expect(config.match(/name: imageAlt/g)).toHaveLength(2);
+    expect(config.match(/name: imageSrc/g)).toHaveLength(4);
+    expect(config.match(/name: imageAlt/g)).toHaveLength(3);
     expect(config).toContain('Fotografía del integrante');
     expect(config).toContain('Imagen principal del evento');
     expect(config).toContain('Imagen principal de la noticia');

@@ -11,6 +11,5 @@ const subjects = Array.isArray(content.subjects)
 export const contactContent = {
   title: isNonEmptyString(content.title) ? content.title.trim() : 'Contáctanos',
   introduction: isNonEmptyString(content.introduction) ? content.introduction.trim() : '',
-  email: isNonEmptyString(content.email) ? content.email.trim() : '',
   subjects: subjects.length > 0 ? subjects : defaultSubjects,
 };
